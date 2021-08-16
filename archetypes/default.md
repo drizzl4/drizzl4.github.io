@@ -14,7 +14,7 @@ disableShare: false
 disableHLJS: false
 hideSummary: false
 ShowReadingTime: true
-ShowBreadCrumbs: true
+ShowBreadCrumbs: false
 ShowPostNavLinks: true
 cover:
     image: "<image path/url>" # image path/url

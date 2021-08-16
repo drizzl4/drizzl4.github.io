@@ -1,0 +1,30 @@
+---
+title: "About"
+layout: "about"
+# url: "/archives/"
+summary: about
+showToc: false
+TocOpen: false
+draft: false
+hidemeta: false
+comments: true
+disableHLJS: true # to disable highlightjs
+disableShare: true
+disableHLJS: false
+hideSummary: false
+searchHidden: false
+ShowReadingTime: false
+ShowBreadCrumbs: false
+ShowPostNavLinks: false
+cover:
+    image: "<image path/url>" # image path/url
+    alt: "<alt text>" # alt text
+    caption: "<text>" # display caption under cover
+    relative: false # when using page bundles set this to true
+    hidden: true # only hide on current single page
+editPost:
+    URL: "https://github.com/drizzl4/drizzl4.github.io/blob/master/content/about"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: false # to append file path to Edit link
+---
+Blog 成功转移时间：20210817 01:19

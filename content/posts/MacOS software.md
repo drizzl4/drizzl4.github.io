@@ -1,9 +1,9 @@
 ---
-title: "About"
+title: "Mac software recommend"
 date: 2021-08-16T22:40:45+08:00
-# weight: 1
+# weight: 2
 # aliases: ["/first"]
-tags: ["about"]
+tags: ["MacOS"]
 author: "drizzl4"
 # author: ["Me", "You"] # multiple authors
 showToc: false
@@ -19,7 +19,7 @@ disableHLJS: false
 hideSummary: false
 searchHidden: false
 ShowReadingTime: true
-ShowBreadCrumbs: true
+ShowBreadCrumbs: false
 ShowPostNavLinks: false
 cover:
     image: "<image path/url>" # image path/url

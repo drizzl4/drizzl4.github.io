@@ -1,7 +1,7 @@
 ---
 title: "Plan"
 date: 2021-08-16T23:06:44+08:00
-# weight: 1
+weight: 1
 # aliases: ["/first"]
 tags: ["Plan"]
 categories: ["Plan"]
@@ -12,7 +12,7 @@ TocOpen: false
 draft: false
 hidemeta: false
 comments: true
-description: "My plan, My way"
+# description: ""
 canonicalURL: "https://canonical.url/to/page"
 disableHLJS: true # to disable highlightjs
 disableShare: false
@@ -20,7 +20,7 @@ disableHLJS: false
 hideSummary: false
 searchHidden: false
 ShowReadingTime: true
-ShowBreadCrumbs: true
+ShowBreadCrumbs: false
 ShowPostNavLinks: false
 cover:
     image: "<image path/url>" # image path/url
@@ -32,7 +32,7 @@ editPost:
     URL: "https://github.com/drizzl4/drizzl4.github.io/blob/master/content"
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
-summary: "Plan"
+summary: "My Plan Record"
 ---
 20210803  读书计划 
 - [ ] ***Java 8 Action***
