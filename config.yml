@@ -14,6 +14,13 @@ minify:
     disableXML: true
     minifyOutput: true
 
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON # is necessary
+
+
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
     title: drizzl4
@@ -30,10 +37,10 @@ params:
     ShowShareButtons: true
     ShowPostNavLinks: true
     ShowBreadCrumbs: true
-    ShowCodeCopyButtons: false
+    ShowCodeCopyButtons: true
     disableSpecial1stPost: false
     disableScrollToTop: false
-    comments: false
+    comments: true
     hidemeta: false
     hideSummary: false
     showtoc: false
@@ -112,17 +119,28 @@ params:
 menu:
     main:
         - identifier: categories
-          name: categories
+          name: Categories
           url: /categories/
-          weight: 10
-        - identifier: tags
-          name: tags
-          url: /tags/
           weight: 20
+        - identifier: tags
+          name: Tags
+          url: /tags/
+          weight: 40
+        - identifier: search
+          name: Search
+          url: /search/
+          weight: 30
+        - identifier: archive
+          name: Archive
+          url: /archive/
+          weight: 10
+          
         # - identifier: example
         #   name: example.org
         #   url: https://example.org
         #   weight: 30
+
+
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 # pygmentsUseClasses: true
 # markup:
