@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://init.best/posts/plan/</loc>
+    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
+  </url><url>
     <loc>https://init.best/categories/</loc>
     <lastmod>2021-08-16T23:06:44+08:00</lastmod>
   </url><url>
@@ -12,9 +15,6 @@
     <lastmod>2021-08-16T23:06:44+08:00</lastmod>
   </url><url>
     <loc>https://init.best/categories/plan/</loc>
-    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
-  </url><url>
-    <loc>https://init.best/posts/plan/</loc>
     <lastmod>2021-08-16T23:06:44+08:00</lastmod>
   </url><url>
     <loc>https://init.best/posts/</loc>
@@ -29,20 +29,22 @@
     <loc>https://init.best/posts/20210731-nagging/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
-    <loc>https://init.best/posts/about/</loc>
-    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
-  </url><url>
-    <loc>https://init.best/tags/about/</loc>
-    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
-  </url><url>
     <loc>https://init.best/tags/java/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
     <loc>https://init.best/posts/java-stream/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
+    <loc>https://init.best/posts/macos-software/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/tags/macos/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
     <loc>https://init.best/tags/nagging/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/about/</loc>
   </url><url>
     <loc>https://init.best/archive/</loc>
   </url><url>

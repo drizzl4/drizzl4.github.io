@@ -16,7 +16,7 @@
       <pubDate>Mon, 16 Aug 2021 23:06:44 +0800</pubDate>
       
       <guid>https://init.best/posts/plan/</guid>
-      <description>My plan, My way</description>
+      <description>My Plan Record</description>
     </item>
     
     <item>
@@ -38,21 +38,30 @@
     </item>
     
     <item>
-      <title>About</title>
-      <link>https://init.best/posts/about/</link>
-      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
-      
-      <guid>https://init.best/posts/about/</guid>
-      <description>software</description>
-    </item>
-    
-    <item>
       <title>Java stream</title>
       <link>https://init.best/posts/java-stream/</link>
       <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
       
       <guid>https://init.best/posts/java-stream/</guid>
       <description>Java stream part</description>
+    </item>
+    
+    <item>
+      <title>Mac software recommend</title>
+      <link>https://init.best/posts/macos-software/</link>
+      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
+      
+      <guid>https://init.best/posts/macos-software/</guid>
+      <description>software</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://init.best/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://init.best/about/</guid>
+      <description>about</description>
     </item>
     
     

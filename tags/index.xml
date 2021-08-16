@@ -20,20 +20,20 @@
     </item>
     
     <item>
-      <title>about</title>
-      <link>https://init.best/tags/about/</link>
-      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
-      
-      <guid>https://init.best/tags/about/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Java</title>
       <link>https://init.best/tags/java/</link>
       <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
       
       <guid>https://init.best/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MacOS</title>
+      <link>https://init.best/tags/macos/</link>
+      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
+      
+      <guid>https://init.best/tags/macos/</guid>
       <description></description>
     </item>
     
