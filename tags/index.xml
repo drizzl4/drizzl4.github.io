@@ -9,13 +9,40 @@
       <link>https://drizzl4.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 16 Aug 2021 22:40:45 +0800</lastBuildDate><atom:link href="https://drizzl4.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Aug 2021 23:06:44 +0800</lastBuildDate><atom:link href="https://drizzl4.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>first</title>
-      <link>https://drizzl4.github.io/tags/first/</link>
+      <title>Plan</title>
+      <link>https://drizzl4.github.io/tags/plan/</link>
+      <pubDate>Mon, 16 Aug 2021 23:06:44 +0800</pubDate>
+      
+      <guid>https://drizzl4.github.io/tags/plan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>https://drizzl4.github.io/tags/about/</link>
       <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
       
-      <guid>https://drizzl4.github.io/tags/first/</guid>
+      <guid>https://drizzl4.github.io/tags/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://drizzl4.github.io/tags/java/</link>
+      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
+      
+      <guid>https://drizzl4.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nagging</title>
+      <link>https://drizzl4.github.io/tags/nagging/</link>
+      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
+      
+      <guid>https://drizzl4.github.io/tags/nagging/</guid>
       <description></description>
     </item>
     

@@ -2,18 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://drizzl4.github.io/about/</loc>
-    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+    <loc>https://drizzl4.github.io/categories/</loc>
+    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
   </url><url>
     <loc>https://drizzl4.github.io/</loc>
-    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
   </url><url>
-    <loc>https://drizzl4.github.io/tags/first/</loc>
-    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+    <loc>https://drizzl4.github.io/tags/plan/</loc>
+    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/categories/plan/</loc>
+    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/posts/plan/</loc>
+    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/posts/</loc>
+    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
   </url><url>
     <loc>https://drizzl4.github.io/tags/</loc>
+    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/posts/20210727-nagging/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
-    <loc>https://drizzl4.github.io/categories/</loc>
+    <loc>https://drizzl4.github.io/posts/20210731-nagging/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/posts/about/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/tags/about/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/tags/java/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/posts/java-stream/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/tags/nagging/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://drizzl4.github.io/archive/</loc>
+  </url><url>
+    <loc>https://drizzl4.github.io/search/</loc>
   </url>
 </urlset>

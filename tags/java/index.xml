@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>first on drizzl4</title>
-    <link>https://drizzl4.github.io/tags/first/</link>
-    <description>Recent content in first on drizzl4</description>
+    <title>Java on drizzl4</title>
+    <link>https://drizzl4.github.io/tags/java/</link>
+    <description>Recent content in Java on drizzl4</description>
     <image>
       <url>https://drizzl4.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://drizzl4.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 16 Aug 2021 22:40:45 +0800</lastBuildDate><atom:link href="https://drizzl4.github.io/tags/first/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Aug 2021 22:40:45 +0800</lastBuildDate><atom:link href="https://drizzl4.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>About</title>
-      <link>https://drizzl4.github.io/about/</link>
+      <title>Java stream</title>
+      <link>https://drizzl4.github.io/posts/java-stream/</link>
       <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
       
-      <guid>https://drizzl4.github.io/about/</guid>
-      <description>Desc Text.</description>
+      <guid>https://drizzl4.github.io/posts/java-stream/</guid>
+      <description>Java stream part</description>
     </item>
     
   </channel>
