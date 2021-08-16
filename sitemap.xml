@@ -8,16 +8,10 @@
     <loc>https://init.best/about/</loc>
     <lastmod>2021-08-17T01:19:45+08:00</lastmod>
   </url><url>
-    <loc>https://init.best/categories/</loc>
-    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
-  </url><url>
     <loc>https://init.best/</loc>
     <lastmod>2021-08-16T23:06:44+08:00</lastmod>
   </url><url>
     <loc>https://init.best/tags/plan/</loc>
-    <lastmod>2021-08-16T23:06:44+08:00</lastmod>
-  </url><url>
-    <loc>https://init.best/categories/plan/</loc>
     <lastmod>2021-08-16T23:06:44+08:00</lastmod>
   </url><url>
     <loc>https://init.best/posts/</loc>
@@ -32,7 +26,13 @@
     <loc>https://init.best/posts/20210731-nagging/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
+    <loc>https://init.best/categories/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
     <loc>https://init.best/tags/java/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/categories/java/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
     <loc>https://init.best/posts/java-stream/</loc>
@@ -45,6 +45,9 @@
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
     <loc>https://init.best/tags/nagging/</loc>
+    <lastmod>2021-08-16T22:40:45+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/categories/nagging/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
     <loc>https://init.best/archive/</loc>
