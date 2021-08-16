@@ -76,10 +76,9 @@ params:
               url: tags
 
     # home-info mode
-    # homeInfoParams:
-    #     Title: "Hi there \U0001F44B"
-    #     Content: Welcome to my blog
-
+    homeInfoParams:
+        Title: "drizzl4"
+        Content: to be continued...
     # socialIcons:
     #     - name: twitter
     #       url: "https://twitter.com/"
@@ -134,10 +133,10 @@ menu:
         #   name: Tags
         #   url: /tags/
         #   weight: 40
-        - identifier: about
-          name: About
-          url: /about/
-          weight: 50
+        # - identifier: about
+        #   name: About
+        #   url: /about/
+        #   weight: 50
           
         # - identifier: example
         #   name: example.org
