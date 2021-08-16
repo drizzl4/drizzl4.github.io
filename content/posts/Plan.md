@@ -4,7 +4,6 @@ date: 2021-08-16T23:06:44+08:00
 weight: 1
 # aliases: ["/first"]
 tags: ["Plan"]
-categories: ["Plan"]
 author: "drizzl4"
 # author: ["Me", "You"] # multiple authors
 showToc: false

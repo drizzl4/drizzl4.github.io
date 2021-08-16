@@ -32,6 +32,7 @@ editPost:
     Text: "Edit" # edit text
     appendFilePath: true # to append file path to Edit link
 summary: "Java stream apply"
+categories: ["Java"]
 ---
 
 ## 基础类
