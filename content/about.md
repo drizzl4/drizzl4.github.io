@@ -1,5 +1,6 @@
 ---
 title: "About"
+date: 2021-08-17T01:19:45+08:00
 layout: "about"
 # url: "/archives/"
 summary: about
@@ -23,8 +24,8 @@ cover:
     relative: false # when using page bundles set this to true
     hidden: true # only hide on current single page
 editPost:
-    URL: "https://github.com/drizzl4/drizzl4.github.io/blob/master/content/about"
-    Text: "Suggest Changes" # edit text
-    appendFilePath: false # to append file path to Edit link
+    URL: "https://github.com/drizzl4/drizzl4.github.io/blob/master/content"
+    Text: "Edit" # edit text
+    appendFilePath: true # to append file path to Edit link
 ---
 Blog 成功转移时间：20210817 01:19

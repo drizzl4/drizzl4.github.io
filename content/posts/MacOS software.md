@@ -29,7 +29,7 @@ cover:
     hidden: true # only hide on current single page
 editPost:
     URL: "https://github.com/drizzl4/drizzl4.github.io/blob/master/content"
-    Text: "Suggest Changes" # edit text
+    Text: "Edit" # edit text
     appendFilePath: true # to append file path to Edit link
 summary: "Mac software recommend"
 ---
