@@ -28,7 +28,7 @@ cover:
     relative: false # when using page bundles set this to true
     hidden: true # only hide on current single page
 editPost:
-    URL: "https://github.com/drizzl4/drizzl4.github.io/content"
+    URL: "https://github.com/drizzl4/drizzl4.github.io/blob/master/content"
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
 summary: "Mac software recommend"
