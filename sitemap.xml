@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>init.best/about/</loc>
+    <loc>https://drizzl4.github.io/about/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
-    <loc>init.best/</loc>
+    <loc>https://drizzl4.github.io/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
-    <loc>init.best/tags/first/</loc>
+    <loc>https://drizzl4.github.io/tags/first/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
-    <loc>init.best/tags/</loc>
+    <loc>https://drizzl4.github.io/tags/</loc>
     <lastmod>2021-08-16T22:40:45+08:00</lastmod>
   </url><url>
-    <loc>init.best/categories/</loc>
+    <loc>https://drizzl4.github.io/categories/</loc>
   </url>
 </urlset>

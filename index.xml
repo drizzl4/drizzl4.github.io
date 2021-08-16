@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>drizzl4</title>
-    <link>init.best/</link>
+    <link>https://drizzl4.github.io/</link>
     <description>Recent content on drizzl4</description>
     <image>
-      <url>init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://drizzl4.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://drizzl4.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 16 Aug 2021 22:40:45 +0800</lastBuildDate><atom:link href="init.best/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Aug 2021 22:40:45 +0800</lastBuildDate><atom:link href="https://drizzl4.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>init.best/about/</link>
+      <link>https://drizzl4.github.io/about/</link>
       <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
       
-      <guid>init.best/about/</guid>
+      <guid>https://drizzl4.github.io/about/</guid>
       <description>Desc Text.</description>
     </item>
     
