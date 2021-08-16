@@ -1,4 +1,4 @@
-baseURL: init.best
+baseURL: https://drizzl4.github.io/
 title: drizzl4
 paginate: 5
 theme: PaperMod
