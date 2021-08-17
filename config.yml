@@ -20,7 +20,7 @@ outputs:
         - RSS
         - JSON # is necessary
 
-
+disqusShortname: drizzl4
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
     title: drizzl4
@@ -78,15 +78,21 @@ params:
     # home-info mode
     homeInfoParams:
         Title: "drizzl4"
-        Content: to be continued...
-    # socialIcons:
-    #     - name: twitter
-    #       url: "https://twitter.com/"
-    #     - name: stackoverflow
-    #       url: "https://stackoverflow.com"
-    #     - name: github
-    #       url: "https://github.com/"
+        Content: >
+            **To be continue ...**
 
+            - Show the next line.
+            
+            - waiting...
+    socialIcons:
+        - name: RsS
+          url: "index.xml"
+        # - name: twitter
+        #   url: "https://twitter.com/"
+        # - name: stackoverflow
+        #   url: "https://stackoverflow.com"
+        # - name: github
+        #   url: "https://github.com/"
     analytics:
         google:
             SiteVerificationTag: "XYZabc"

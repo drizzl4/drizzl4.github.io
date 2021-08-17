@@ -46,4 +46,4 @@ summary: "My Plan Record"
 
 20210817 Blog完善修补
 - [ ] Blog增加评论
-- [ ] Blog增加RSS支持
+- [x] Blog增加RSS支持
