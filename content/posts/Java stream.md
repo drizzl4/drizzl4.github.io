@@ -231,7 +231,7 @@ Optional<Integer> min = number.stream().reduce(Integer::min);
 ## 小总结
 ![](https://init.best/post-images/1628878254005.png)
 ## 数值流
-Java 8引入三个原始类型特化流接口，IntStream、DoubleStream、LongStream. 从而避免装箱的成本。  
+Java 8引入三个原始类型特化流接口，IntStream、DoubleStream、LongStream. 从而避免暗中装箱的成本。  
 ### 映射到数值流
 通过mapToInt、mapToDouble、mapToLong，例如：
 ```java
@@ -253,3 +253,32 @@ Optional maxCalories = menu.stream()
 //如果没有最大值，显式提供一个默认最大值
 int max = maxCalories.orElse(1);
 ```
+### 数值范围
+Java 8 引入了两个用于IntStream和LongSteram的静态方法生成一段连续数字，例如1-100  
+其中range是不包含结束值的，rangeClosed则包含结束值  
+```java
+//从1到100的50个偶数
+IntStream evenNumbers = IntStream.rangeClosed(1,100);
+                    .filter(n -> n%2 ==0);
+```
+## 构建流
+### 值创建流
+```java
+Stream<String> str = Stream.of("Java 8", "Lambda","In","Action");
+str.map(String::toUpperCase).forEach(System.out.println);
+```
+生成一个空流  
+```java
+Stream<String> str = Stream.empty();
+```
+### 数组创建流
+
+使用静态方法Arrays.stream从数组创建一个流，它接受一个数组作为参数  
+
+```java
+int[] numbers = {2, 3, 4, 5, 6};
+int sum = ArrayList.stream(numbers).sum();
+```
+
+![](/images/beautiful.jpg)
+
