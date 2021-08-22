@@ -202,6 +202,7 @@ Optional<Integer> firstSquareDivisibleByThree =
 ## 归约
 使用reduce操作来表达更复杂的查询，比如“计算菜单中的总卡路里”或“菜单中卡路里最高的菜是哪一个”。此类查询需要将流中所有元素反复结合起来，得到一个值，比如一个Integer。这样的查询可以被归类为归约操作 (将流归约成一个值)。用函数式编程语言的术语来说，这称为折叠(fold)，因为你可以将这个操
 作看成把一张长长的纸(你的流)反复折叠成一个小方块，而这就是折叠操作的结果。
+
 ### 元素求和
 ```java
 //求和
@@ -209,7 +210,7 @@ int sum = numbers.stream().reduce(0, (a, b) -> a+b);
 //相乘
 int product = numbers.stream().reduce(1,(a, b) -> a*b);
 ```
-![](https://init.best/post-images/1628737565729.png)
+![image-20210819143355223](/static/images/image-20210819143355223.png)
 Java 8中，Integer类增加sum静态方法来求和
 ```java
 int sum = numbers.stream().reduce(0, Integer::sum);
@@ -229,7 +230,7 @@ Optional<Integer> max = number.stream().reduce(Integer::max);
 Optional<Integer> min = number.stream().reduce(Integer::min);
 ```
 ## 小总结
-![](https://init.best/post-images/1628878254005.png)
+![image-20210819143428774](/static/images/image-20210819143428774.png)
 ## 数值流
 Java 8引入三个原始类型特化流接口，IntStream、DoubleStream、LongStream. 从而避免暗中装箱的成本。  
 ### 映射到数值流
@@ -280,5 +281,19 @@ int[] numbers = {2, 3, 4, 5, 6};
 int sum = ArrayList.stream(numbers).sum();
 ```
 
-![](/images/beautiful.jpg)
+### 文件生成流
+
+```java
+//筛选不同的单词的总数
+long uniqueWords = 0;
+//流会自动关闭
+try(Stream<String> lines = Files.lines(Paths.get("data.txt"), Charset.defaultCharset())) {
+  uniqueWords = lines.flatMap(line -> Arrays.stream(line.split(" "))).distinct()
+    .count();
+}catch(IOException e) {
+  //如果打开文件时出现异常
+}
+```
+
+**注意：flatMap的使用**
 

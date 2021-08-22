@@ -79,11 +79,13 @@ params:
     homeInfoParams:
         Title: "drizzl4"
         Content: >
-            **To be continue ...**
+            **What should I say ?**
 
-            - Show the next line.
+            - 时间过得那么快.
             
-            - waiting...
+            - 一天天的消逝.
+
+            - What should I do ?
     socialIcons:
         - name: RsS
           url: "index.xml"
