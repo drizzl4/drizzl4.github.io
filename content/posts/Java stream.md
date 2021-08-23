@@ -240,6 +240,7 @@ int calories = menu.stream().mapToInt(Dish::getCalories).sum();
 ```
 此处mapToInt并不是返回一个Stream<Integer>,而是IntStream，最终调用IntStream接口的sum()方法。  
 ### 数值流到非特化流
+
 例如：
 ```java
 IntStream intStream = menu.stream().mapToInt(Dish::getCalories);
@@ -263,6 +264,7 @@ IntStream evenNumbers = IntStream.rangeClosed(1,100);
                     .filter(n -> n%2 ==0);
 ```
 ## 构建流
+
 ### 值创建流
 ```java
 Stream<String> str = Stream.of("Java 8", "Lambda","In","Action");
@@ -296,4 +298,22 @@ try(Stream<String> lines = Files.lines(Paths.get("data.txt"), Charset.defaultCha
 ```
 
 **注意：flatMap的使用**
+
+### 无限流简单使用
+
+#### 使用iterate生成
+
+```java
+Stream.iterate(0,n -> n+2)
+  .limit(10)
+  .foreach(System.out.println);
+```
+
+#### 使用generate生成
+
+```java
+Stream.generate(Math::random)
+          .limit(5)
+          .forEach(System.out::println);
+```
 
