@@ -45,9 +45,3 @@ summary: "My Plan Record"
 20210815 读书计划 
 
 - [ ] ***MySQL技术内幕*** 
-
-20210817 Blog完善修补
-
-- [x] Blog增加评论
-- [x] Blog增加RSS支持
-
