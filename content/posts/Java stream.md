@@ -317,3 +317,80 @@ Stream.generate(Math::random)
           .forEach(System.out::println);
 ```
 
+
+
+## 用流收集数据
+
+### 生成Map
+
+```java
+Map<Currency, List<Transaction>> transactionsByCurrencies = transactions.stream().collect(groupingBy(Transaction::getCurrency));
+```
+
+### 查找流中最大值和最小值
+
+```java
+Comparator<Dish> dishCaloriesComparator = Comparator.comparingInt(Dish::getCalories);
+Optional<Dish> mostCalories = menu.stream().collect(maxBy(dishCaloriesComparator));
+```
+
+### 汇总
+
+#### 求和
+
+```java
+int totalCalories = menu.stream().collect(summingInt(Dish::getCalories));
+```
+
+类似的方法还有：summingLong、summingDouble
+
+#### 平均数
+
+```java
+int averageCalories = menu.stream().collect(averagingInt(Dish::getCalories));
+```
+
+#### 个数、总和、平均值、最大值、最小值
+
+```java
+IntSummaryStatistics menuStatistics = menu.stream().collect(summarizingInt(Dish::getCalories));
+```
+
+同样存在DoubleSummaryStatistics、LongSummaryStatistics
+
+### 连接字符串
+
+```java
+String shortMenu = menu.stream().map(Dish::getName).collect(join());
+```
+
+如果Dish类存在一个toString方法返回菜肴名称，则不需要进行map筛选名称变量  
+
+```java
+String shortName = menu.stream().collect(join());
+```
+
+分割方法：
+
+```java
+String shortName = menu.stream().map(Dish::getCalories).collect(join(","));
+```
+
+## 分组
+
+```java
+public enum CaloricLevel  { DIEF, NORMAL, FAT}
+Map<CaloricLevel, List<Dish> dishesByCaloriesLevel = menu.stream().collect(
+	groupBy(dish -> {
+    if(dish.getCalories()<=400) return CaloricLevel.DIEF;
+    else if(dish.getCalories()<=700) return CaloricLevel.NORMAL;
+    else return CaloricLevel.FAT;
+  }))
+```
+
+
+
+
+
+
+
