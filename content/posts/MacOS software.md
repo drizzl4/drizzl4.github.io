@@ -77,4 +77,8 @@ Mac software recommend
 |FastClip|copy tool|
 |Charles|get information|
 |Dbeaver|database tool|
-|Zotero|mange tool|
+|Zotero|manage tool|
+|Another Redis Desktop Manager|redis UI|
+|dbKoda|mongoldb UI|
+|balenaEtcher|Flash OS images to SD cards & USB drives|
+

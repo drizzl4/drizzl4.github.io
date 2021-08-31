@@ -79,15 +79,17 @@ params:
     homeInfoParams:
         Title: "drizzl4"
         Content: >
-            **What should I say ?**
-
-            - 时间过得那么快.
+            **生活是苦难的 我又划着我的断桨出发了**
             
-            - 
+            # **What should I say ?**
 
-            - 一天天消逝.
+            # - 时间过得那么快.
+            
+            # - 
 
-            - **What should I do ?**
+            # - 一天天消逝.
+
+            # - **What should I do ?**
 
     socialIcons:
         - name: RsS

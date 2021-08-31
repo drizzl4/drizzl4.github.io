@@ -378,6 +378,8 @@ String shortName = menu.stream().map(Dish::getCalories).collect(join(","));
 
 ## 分组
 
+通过条件划分：
+
 ```java
 public enum CaloricLevel  { DIEF, NORMAL, FAT}
 Map<CaloricLevel, List<Dish> dishesByCaloriesLevel = menu.stream().collect(
@@ -388,9 +390,59 @@ Map<CaloricLevel, List<Dish> dishesByCaloriesLevel = menu.stream().collect(
   }))
 ```
 
+### 多级分组
 
+```java
+public enum CaloricLevel  { DIEF, NORMAL, FAT}
+Map<Dish.Type, Map<CaloricLevel, List<Dish>> dishesByTypeCaloricLevel = 
+  menu.stream().collect(
+		groupingBy(Dish::getType, 
+              groupingBy(dish -> {
+                if(dish.getCalories()<=400) return CaloricLevel.DIEF;
+    						else if(dish.getCalories()<=700) return CaloricLevel.NORMAL;
+    						else return CaloricLevel.FAT;
+              })))
+```
 
+### 按子组收集数据
 
+#### 1. 把收集器的结果转换为另一种类型
 
+```java
+Map<Dish.Type, Long> typesCount = menu.stream().collect(
+groupingBy(Dish::getType, counting()));
 
+//结果： {MEAT=3, FISH=2, OTHER=4}
+```
+
+此外，gorupingBy(x)是groupingBy(x, toList())的简便写法。
+
+```java
+//按类型分类，得出分组中热量最高的
+Map<Dish.Type, Optional<Dish>> mostCaloricByType =
+    menu.stream()
+        .collect(groupingBy(Dish::getType,
+                            maxBy(comparingInt(Dish::getCalories))));
+
+//结果：{FISH=Optional[salmon], OTHER=Optional[pizza], MEAT=Optional[pork]}
+```
+
+**注意：**
+
+> 这个Map中的值是Optional，因为这是maxBy工厂方法生成的收集器的类型，但实际上， 如果菜单中没有某一类型的Dish，这个类型就不会对应一个Optional. empty()值， 而且根本不会出现在Map的键中。groupingBy收集器只有在应用分组条件后，第一次在 流中找到某个键对应的元素时才会把键加入分组Map中。这意味着Optional包装器在这 里不是很有用，因为它不会仅仅因为它是归约收集器的返回类型而表达一个最终可能不 存在却意外存在的值。
+
+去掉Optional：
+
+```java
+Map<Dish.Type, Dish> mostCaloricByType = 
+  menu.stream().collect(groupingBy(Dish::getType,
+                                  collectingAndThen(
+                                  	maxBy(comparingInt(Dish::getCalories)),
+                                  Optional::get)));
+//结果：{FISH=salmon, OTHER=pizza, MEAT=pork}
+```
+
+> 这个工厂方法接受两个参数——要转换的收集器以及转换函数，并返回另一个收集器。这个 收集器相当于旧收集器的一个包装，collect操作的最后一步就是将返回值用转换函数做一个映 射。在这里，被包起来的收集器就是用maxBy建立的那个，而转换函数Optional::get则把返 回的Optional中的值提取出来。前面已经说过，这个操作放在这里是安全的，因为reducing 收集器永远都不会返回Optional.empty()。
+
+#### 2. 与**groupingBy**联合使用的其他收集器的例子
 
