@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on drizzl4</title>
-    <link>https://init.best/posts/</link>
-    <description>Recent content in Posts on drizzl4</description>
+    <title>Mybatis on drizzl4</title>
+    <link>https://init.best/categories/mybatis/</link>
+    <description>Recent content in Mybatis on drizzl4</description>
     <image>
       <url>https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 31 Aug 2021 00:28:54 +0800</lastBuildDate><atom:link href="https://init.best/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Plan</title>
-      <link>https://init.best/posts/plan/</link>
-      <pubDate>Mon, 16 Aug 2021 23:06:44 +0800</pubDate>
-      
-      <guid>https://init.best/posts/plan/</guid>
-      <description>My Plan Record</description>
-    </item>
-    
+    <lastBuildDate>Tue, 31 Aug 2021 00:28:54 +0800</lastBuildDate><atom:link href="https://init.best/categories/mybatis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mybatis connects Mysql</title>
       <link>https://init.best/posts/mybatis-connects-mysql/</link>
@@ -33,42 +24,6 @@ Mybatis: 3.5.7
   在resources里面增加db.properties，对Mysql进行配置
   增加mybatis-cofig.xml文件
 &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE configuration PUBLIC &amp;#34;-//mybatis.org//DTD Config 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-config.dtd&amp;#34;&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;!--指定配置文件--&amp;gt; &amp;lt;properties resource=&amp;#34;resources/db.properties&amp;#34;/&amp;gt; &amp;lt;settings&amp;gt; &amp;lt;!--全局开启或关闭缓存，默认为true--&amp;gt; &amp;lt;setting name=&amp;#34;cacheEnabled&amp;#34; value=&amp;#34;false&amp;#34;/&amp;gt; &amp;lt;!--延迟加载的全局开关。可通过设置fetchType属性来覆盖该项的配置。默认值为false --&amp;gt; &amp;lt;setting name=&amp;#34;lazyLoadingEnabled&amp;#34; value=&amp;#34;false&amp;#34;/&amp;gt; &amp;lt;/settings&amp;gt; &amp;lt;!--指定扫描的包--&amp;gt; &amp;lt;typeAliases&amp;gt; &amp;lt;package name=&amp;#34;org.apache.ibatis.mysqltest.pojo&amp;#34;/&amp;gt; &amp;lt;/typeAliases&amp;gt; &amp;lt;!--环境配置--&amp;gt; &amp;lt;environments default=&amp;#34;development&amp;#34;&amp;gt; &amp;lt;environment id=&amp;#34;development&amp;#34;&amp;gt; &amp;lt;transactionManager type=&amp;#34;JDBC&amp;#34;/&amp;gt; &amp;lt;dataSource type=&amp;#34;POOLED&amp;#34;&amp;gt; &amp;lt;property name=&amp;#34;driver&amp;#34; value=&amp;#34;${driver-class-name}&amp;#34;/&amp;gt; &amp;lt;property name=&amp;#34;url&amp;#34; value=&amp;#34;${url}&amp;#34;/&amp;gt; &amp;lt;property name=&amp;#34;username&amp;#34; value=&amp;#34;${username}&amp;#34;/&amp;gt; &amp;lt;property name=&amp;#34;password&amp;#34; value=&amp;#34;${password}&amp;#34;/&amp;gt; &amp;lt;/dataSource&amp;gt; &amp;lt;/environment&amp;gt; &amp;lt;/environments&amp;gt; &amp;lt;!</description>
-    </item>
-    
-    <item>
-      <title>20210727 Nagging</title>
-      <link>https://init.best/posts/20210727-nagging/</link>
-      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
-      
-      <guid>https://init.best/posts/20210727-nagging/</guid>
-      <description>Don&amp;#39;t be serious</description>
-    </item>
-    
-    <item>
-      <title>20210731 Nagging</title>
-      <link>https://init.best/posts/20210731-nagging/</link>
-      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
-      
-      <guid>https://init.best/posts/20210731-nagging/</guid>
-      <description>Don&amp;#39;t be serious</description>
-    </item>
-    
-    <item>
-      <title>Java stream</title>
-      <link>https://init.best/posts/java-stream/</link>
-      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
-      
-      <guid>https://init.best/posts/java-stream/</guid>
-      <description>Java stream part</description>
-    </item>
-    
-    <item>
-      <title>Mac software recommend</title>
-      <link>https://init.best/posts/macos-software/</link>
-      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
-      
-      <guid>https://init.best/posts/macos-software/</guid>
-      <description>software</description>
     </item>
     
   </channel>

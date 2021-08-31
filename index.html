@@ -74,13 +74,12 @@
 <h1>drizzl4</h1>
 </header>
 <section class=entry-content>
-<p><p><strong>What should I say ?</strong></p>
-<ul>
-<li>时间过得那么快.</li>
-<li></li>
-<li>一天天消逝.</li>
-<li><strong>What should I do ?</strong></li>
-</ul>
+<p><p><strong>生活是苦难的 我又划着我的断桨出发了</strong></p>
+<h1 id=what-should-i-say-><strong>What should I say ?</strong></h1>
+<h1 id=--时间过得那么快>- 时间过得那么快.</h1>
+<h1 id=->-</h1>
+<h1 id=--一天天消逝>- 一天天消逝.</h1>
+<h1 id=--what-should-i-do->- <strong>What should I do ?</strong></h1>
 </p>
 </section>
 <footer class=entry-footer>
@@ -99,6 +98,23 @@
 </section>
 <footer class=entry-footer>August 16, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;drizzl4</footer>
 <a class=entry-link aria-label="post link to Plan" href=https://init.best/posts/plan/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
+<h2>Mybatis connects Mysql</h2>
+</header>
+<section class=entry-content>
+<p>Mybatis之连接Mysql 环境介绍 JDK: 1.8
+Mysql: 8.0.22
+Mybatis: 3.5.7
+过程 下载Mybatis源码
+新建数据库
+在resources里面增加db.properties，对Mysql进行配置
+增加mybatis-cofig.xml文件
+&lt;?xml version="1.0" encoding="UTF-8" ?> &lt;!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> &lt;configuration> &lt;!--指定配置文件--> &lt;properties resource="resources/db.properties"/> &lt;settings> &lt;!--全局开启或关闭缓存，默认为true--> &lt;setting name="cacheEnabled" value="false"/> &lt;!--延迟加载的全局开关。可通过设置fetchType属性来覆盖该项的配置。默认值为false --> &lt;setting name="lazyLoadingEnabled" value="false"/> &lt;/settings> &lt;!--指定扫描的包--> &lt;typeAliases> &lt;package name="org.apache.ibatis.mysqltest.pojo"/> &lt;/typeAliases> &lt;!--环境配置--> &lt;environments default="development"> &lt;environment id="development"> &lt;transactionManager type="JDBC"/> &lt;dataSource type="POOLED"> &lt;property name="driver" value="${driver-class-name}"/> &lt;property name="url" value="${url}"/> &lt;property name="username" value="${username}"/> &lt;property name="password" value="${password}"/> &lt;/dataSource> &lt;/environment> &lt;/environments> &lt;!...</p>
+</section>
+<footer class=entry-footer>August 31, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;drizzl4</footer>
+<a class=entry-link aria-label="post link to Mybatis connects Mysql" href=https://init.best/posts/mybatis-connects-mysql/></a>
 </article>
 <article class=post-entry>
 <header class=entry-header>
@@ -130,16 +146,11 @@
 <footer class=entry-footer>August 16, 2021&nbsp;·&nbsp;3 min&nbsp;·&nbsp;drizzl4</footer>
 <a class=entry-link aria-label="post link to Java stream" href=https://init.best/posts/java-stream/></a>
 </article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Mac software recommend</h2>
-</header>
-<section class=entry-content>
-<p>Mac software recommend</p>
-</section>
-<footer class=entry-footer>August 16, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;drizzl4</footer>
-<a class=entry-link aria-label="post link to Mac software recommend" href=https://init.best/posts/macos-software/></a>
-</article>
+<footer class=page-footer>
+<nav class=pagination>
+<a class=next href=https://init.best/page/2/>Next Page »</a>
+</nav>
+</footer>
 </main>
 <footer class=footer>
 <span>&copy; 2021 <a href=https://init.best/>drizzl4</a></span>

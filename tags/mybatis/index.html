@@ -3,11 +3,11 @@
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
 <meta name=robots content="index, follow">
-<title>Categories | drizzl4</title>
+<title>Mybatis | drizzl4</title>
 <meta name=keywords content>
 <meta name=description content="drizzl4">
 <meta name=author content="drizzl4">
-<link rel=canonical href=https://init.best/categories/>
+<link rel=canonical href=https://init.best/tags/mybatis/>
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
@@ -21,14 +21,14 @@
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.87.0">
-<link rel=alternate type=application/rss+xml href=https://init.best/categories/index.xml>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="Categories">
+<link rel=alternate type=application/rss+xml href=https://init.best/tags/mybatis/index.xml>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="Mybatis">
 <meta property="og:description" content="drizzl4">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://init.best/categories/"><meta property="og:image" content="https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"><meta property="og:site_name" content="drizzl4">
+<meta property="og:url" content="https://init.best/tags/mybatis/"><meta property="og:image" content="https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"><meta property="og:site_name" content="drizzl4">
 <meta name=twitter:card content="summary_large_image">
 <meta name=twitter:image content="https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E">
-<meta name=twitter:title content="Categories">
+<meta name=twitter:title content="Mybatis">
 <meta name=twitter:description content="drizzl4">
 </head>
 <body class=list id=top>
@@ -55,7 +55,7 @@
 </li>
 <li>
 <a href=https://init.best/categories/ title=Categories>
-<span class=active>Categories</span>
+<span>Categories</span>
 </a>
 </li>
 <li>
@@ -67,23 +67,26 @@
 </nav>
 </header>
 <main class=main>
-<header class=page-header>
-<h1>Categories</h1>
+<header class=page-header><div class=breadcrumbs><a href=https://init.best/>Home</a>&nbsp;»&nbsp;<a href=https://init.best/tags/>Tags</a></div>
+<h1>Mybatis</h1>
 </header>
-<ul class=terms-tags>
-<li>
-<a href=https://init.best/categories/java/>Java <sup><strong><sup>1</sup></strong></sup> </a>
-</li>
-<li>
-<a href=https://init.best/categories/mybatis/>Mybatis <sup><strong><sup>1</sup></strong></sup> </a>
-</li>
-<li>
-<a href=https://init.best/categories/mysql/>Mysql <sup><strong><sup>1</sup></strong></sup> </a>
-</li>
-<li>
-<a href=https://init.best/categories/nagging/>Nagging <sup><strong><sup>2</sup></strong></sup> </a>
-</li>
-</ul>
+<article class="post-entry tag-entry">
+<header class=entry-header>
+<h2>Mybatis connects Mysql</h2>
+</header>
+<section class=entry-content>
+<p>Mybatis之连接Mysql 环境介绍 JDK: 1.8
+Mysql: 8.0.22
+Mybatis: 3.5.7
+过程 下载Mybatis源码
+新建数据库
+在resources里面增加db.properties，对Mysql进行配置
+增加mybatis-cofig.xml文件
+&lt;?xml version="1.0" encoding="UTF-8" ?> &lt;!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> &lt;configuration> &lt;!--指定配置文件--> &lt;properties resource="resources/db.properties"/> &lt;settings> &lt;!--全局开启或关闭缓存，默认为true--> &lt;setting name="cacheEnabled" value="false"/> &lt;!--延迟加载的全局开关。可通过设置fetchType属性来覆盖该项的配置。默认值为false --> &lt;setting name="lazyLoadingEnabled" value="false"/> &lt;/settings> &lt;!--指定扫描的包--> &lt;typeAliases> &lt;package name="org.apache.ibatis.mysqltest.pojo"/> &lt;/typeAliases> &lt;!--环境配置--> &lt;environments default="development"> &lt;environment id="development"> &lt;transactionManager type="JDBC"/> &lt;dataSource type="POOLED"> &lt;property name="driver" value="${driver-class-name}"/> &lt;property name="url" value="${url}"/> &lt;property name="username" value="${username}"/> &lt;property name="password" value="${password}"/> &lt;/dataSource> &lt;/environment> &lt;/environments> &lt;!...</p>
+</section>
+<footer class=entry-footer>August 31, 2021&nbsp;·&nbsp;1 min&nbsp;·&nbsp;drizzl4</footer>
+<a class=entry-link aria-label="post link to Mybatis connects Mysql" href=https://init.best/posts/mybatis-connects-mysql/></a>
+</article>
 </main>
 <footer class=footer>
 <span>&copy; 2021 <a href=https://init.best/>drizzl4</a></span>
