@@ -80,17 +80,6 @@ params:
         Title: "drizzl4"
         Content: >
             **生活是苦难的 我又划着我的断桨出发了**
-            
-            # **What should I say ?**
-
-            # - 时间过得那么快.
-            
-            # - 
-
-            # - 一天天消逝.
-
-            # - **What should I do ?**
-
     socialIcons:
         - name: RsS
           url: "index.xml"
