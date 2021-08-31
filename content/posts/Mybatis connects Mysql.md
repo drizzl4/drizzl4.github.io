@@ -33,7 +33,7 @@ showToc: false
 comments: true
 description: ""
 searchHidden: false
-# summary: "Mybatis connects Mysql"
+summary: "Mybatis connects Mysql"
 ---
 
 # Mybatis之连接Mysql
@@ -116,6 +116,6 @@ Mybatis: 3.5.7
             System.out.println(u);
           }
         }
-      ```
+   ```
 ## 对应文件结构
 ![image-20210831214253195](/static/images/image-20210831214253195.png)
