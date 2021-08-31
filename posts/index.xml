@@ -25,14 +25,7 @@
       <pubDate>Tue, 31 Aug 2021 00:28:54 +0800</pubDate>
       
       <guid>https://init.best/posts/mybatis-connects-mysql/</guid>
-      <description>Mybatis之连接Mysql 环境介绍 JDK: 1.8
-Mysql: 8.0.22
-Mybatis: 3.5.7
-过程   下载Mybatis源码
-  新建数据库
-  在resources里面增加db.properties，对Mysql进行配置
-  增加mybatis-cofig.xml文件
-&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34; ?&amp;gt; &amp;lt;!DOCTYPE configuration PUBLIC &amp;#34;-//mybatis.org//DTD Config 3.0//EN&amp;#34; &amp;#34;http://mybatis.org/dtd/mybatis-3-config.dtd&amp;#34;&amp;gt; &amp;lt;configuration&amp;gt; &amp;lt;!--指定配置文件--&amp;gt; &amp;lt;properties resource=&amp;#34;resources/db.properties&amp;#34;/&amp;gt; &amp;lt;settings&amp;gt; &amp;lt;!--全局开启或关闭缓存，默认为true--&amp;gt; &amp;lt;setting name=&amp;#34;cacheEnabled&amp;#34; value=&amp;#34;false&amp;#34;/&amp;gt; &amp;lt;!--延迟加载的全局开关。可通过设置fetchType属性来覆盖该项的配置。默认值为false --&amp;gt; &amp;lt;setting name=&amp;#34;lazyLoadingEnabled&amp;#34; value=&amp;#34;false&amp;#34;/&amp;gt; &amp;lt;/settings&amp;gt; &amp;lt;!--指定扫描的包--&amp;gt; &amp;lt;typeAliases&amp;gt; &amp;lt;package name=&amp;#34;org.apache.ibatis.mysqltest.pojo&amp;#34;/&amp;gt; &amp;lt;/typeAliases&amp;gt; &amp;lt;!--环境配置--&amp;gt; &amp;lt;environments default=&amp;#34;development&amp;#34;&amp;gt; &amp;lt;environment id=&amp;#34;development&amp;#34;&amp;gt; &amp;lt;transactionManager type=&amp;#34;JDBC&amp;#34;/&amp;gt; &amp;lt;dataSource type=&amp;#34;POOLED&amp;#34;&amp;gt; &amp;lt;property name=&amp;#34;driver&amp;#34; value=&amp;#34;${driver-class-name}&amp;#34;/&amp;gt; &amp;lt;property name=&amp;#34;url&amp;#34; value=&amp;#34;${url}&amp;#34;/&amp;gt; &amp;lt;property name=&amp;#34;username&amp;#34; value=&amp;#34;${username}&amp;#34;/&amp;gt; &amp;lt;property name=&amp;#34;password&amp;#34; value=&amp;#34;${password}&amp;#34;/&amp;gt; &amp;lt;/dataSource&amp;gt; &amp;lt;/environment&amp;gt; &amp;lt;/environments&amp;gt; &amp;lt;!</description>
+      <description>Mybatis connects Mysql</description>
     </item>
     
     <item>
