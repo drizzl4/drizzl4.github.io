@@ -29,7 +29,7 @@ editPost:
 
 tags: ["Mybatis","Mysql"]
 categories: ["Mybatis","Mysql"]
-showToc: false
+showToc: true
 comments: true
 description: ""
 searchHidden: false

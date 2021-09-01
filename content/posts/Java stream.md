@@ -36,6 +36,7 @@ categories: ["Java"]
 ---
 
 ## 基础类
+
 Dish
 ```java
 public class Dish {
@@ -446,3 +447,107 @@ Map<Dish.Type, Dish> mostCaloricByType =
 
 #### 2. 与**groupingBy**联合使用的其他收集器的例子
 
+将List变为Set
+
+```java
+Map<Dish.Type, Set<CaloricLevel>> caloricLevelsByType = 
+  menu.stream().collect(
+		groupingBy(Dish::getType, mapping(
+    		dish -> {
+           if (dish.getCalories() <= 400) return CaloricLevel.DIET;
+           else if (dish.getCalories() <= 700) return CaloricLevel.NORMAL;
+           else return CaloricLevel.FAT;
+        }, toSet())));
+```
+
+如果需要设置Set的类型，可以通过toCollection  
+
+```java
+Map<Dish.Type, Set<CaloricLevel>> caloricLevelsByType = 
+  menu.stream().collect(
+		groupingBy(Dish::getType, mapping(
+    		dish -> {
+           if (dish.getCalories() <= 400) return CaloricLevel.DIET;
+           else if (dish.getCalories() <= 700) return CaloricLevel.NORMAL;
+           else return CaloricLevel.FAT;
+        }, toCollection(HashSet::new))));
+```
+
+## 分区
+
+分区为分组的特殊情况，其会分为true和false两组  
+
+```java
+Map<Boolean, List<Dish>> partitionedMenu = 
+  		menu.stream().collect(partitioningBy(Dish::isVegetarian));
+
+//结果：{false=[pork, beef, chicken, prawns, salmon],true=[french fries, rice, season fruit, pizza]}
+```
+
+分区进阶  
+
+```java
+Map<Boolean, Map<Dish.Type, List<Dish>>> vegetarianDishesByType = 
+  menu.stream().collect(
+		partitioningBy(Dish::isVegetarian, groupingBy(Dish::getType)));
+
+//结果：{false={FISH=[prawns, salmon], MEAT=[pork, beef, chicken]},true={OTHER=[french fries, rice, season fruit, pizza]}}
+```
+
+得到热量最高  
+
+```java
+Map<Boolean, Dish> mostCaloricPartitionedByVegetarian = 
+  menu.stream().collect(
+		partitioningBy(Dish::isVegetarian,
+                  collectingAndThen(
+                    maxBy(comparingInt(Dish::getCalories)),
+                  	Optional::get)));
+```
+
+## 将数字按质数和非质数分区
+
+有需要可继续看此部分
+
+## 收集器接口
+
+有需要可继续看此部分
+
+
+
+## 并行流
+
+```java
+public static long parallelSum(long n) {
+  return Stream.iterate(1L, i -> i+1)
+    .limit(n)
+    .parallel()
+    .reduce(0L, Long::sum);
+}
+```
+
+并行流线程池：  
+
+并行流内部使用了默认的ForkJoinPool，它默认的线程数量就是你的处理器的数量，这个值是由Runtime.getRuntime().available-Processors()得到的。  
+
+可以通过：
+
+```java
+System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism","12");
+```
+
+> 这是一个全局设置，因此它将影响代码中所有的并行流。反过来说，目前还无法专为某个 并行流指定这个值。一般而言，让ForkJoinPool的大小等于处理器数量是个不错的默认值， 除非你有很好的理由，否则我们强烈建议你不要修改它。
+
+**并行流注意：**
+
+1. 留意装箱。自动装箱和拆箱操作会大大降低性能。Java 8中有原始类型流(IntStream、 LongStream、DoubleStream)来避免这种操作，但凡有可能都应该用这些流。
+
+2. 有些操作本身在并行流上的性能就比顺序流差。特别是limit和findFirst等依赖于元 素顺序的操作，它们在并行流上执行的代价非常大。例如，findAny会比findFirst性 能好，因为它不一定要按顺序来执行。你总是可以调用unordered方法来把有序流变成 无序流。那么，如果你需要流中的*n*个元素而不是专门要前*n*个的话，对无序并行流调用 limit可能会比单个有序流(比如数据源是一个List)更高效。
+
+3. 对于较小的数据量，选择并行流几乎从来都不是一个好的决定。并行处理少数几个元素 的好处还抵不上并行化造成的额外开销。
+
+4. 要考虑流背后的数据结构是否易于分解。例如，ArrayList的拆分效率比LinkedList 高得多，因为前者用不着遍历就可以平均拆分，而后者则必须遍历。另外，用range工厂方法创建的原始类型流也可以快速分解。
+
+5. 考虑终端操作中合并步骤的代价是大是小(例如Collector中的combiner方法)。如果这一步代价很大，那么组合每个子流产生的部分结果所付出的代价就可能会超出通过并行流得到的性能提升。
+
+   ![image-20210901231238662](/static/images/image-20210901231238662.png)

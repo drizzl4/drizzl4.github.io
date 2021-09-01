@@ -1,7 +1,6 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
-# weight: 1
 # aliases: ["/first"]
 author: "drizzl4"
 # author: ["Me", "You"] # multiple authors
@@ -27,12 +26,13 @@ editPost:
     Text: "Edit" # edit text
     appendFilePath: true # to append file path to Edit link
 
+# weight: 1
 tags: ["Post"]
 categories: ["test"]
-showToc: false
+showToc: true
 comments: true
 description: "Don't be serious"
 searchHidden: false
-# summary: ""
+summary: ""
 ---
 
