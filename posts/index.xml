@@ -9,7 +9,7 @@
       <link>https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 31 Aug 2021 00:28:54 +0800</lastBuildDate><atom:link href="https://init.best/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Sep 2021 11:18:35 +0800</lastBuildDate><atom:link href="https://init.best/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Plan</title>
       <link>https://init.best/posts/plan/</link>
@@ -17,6 +17,24 @@
       
       <guid>https://init.best/posts/plan/</guid>
       <description>My Plan Record</description>
+    </item>
+    
+    <item>
+      <title>Mybatis Return Empty</title>
+      <link>https://init.best/posts/mybatis-return-empty/</link>
+      <pubDate>Mon, 06 Sep 2021 11:18:35 +0800</pubDate>
+      
+      <guid>https://init.best/posts/mybatis-return-empty/</guid>
+      <description>Mybatis 不同类型返回值记录</description>
+    </item>
+    
+    <item>
+      <title>Java Optional</title>
+      <link>https://init.best/posts/java-optional/</link>
+      <pubDate>Thu, 02 Sep 2021 01:01:03 +0800</pubDate>
+      
+      <guid>https://init.best/posts/java-optional/</guid>
+      <description>Java Optional</description>
     </item>
     
     <item>

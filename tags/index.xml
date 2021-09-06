@@ -9,13 +9,22 @@
       <link>https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 31 Aug 2021 00:28:54 +0800</lastBuildDate><atom:link href="https://init.best/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Sep 2021 11:18:35 +0800</lastBuildDate><atom:link href="https://init.best/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mybatis</title>
       <link>https://init.best/tags/mybatis/</link>
-      <pubDate>Tue, 31 Aug 2021 00:28:54 +0800</pubDate>
+      <pubDate>Mon, 06 Sep 2021 11:18:35 +0800</pubDate>
       
       <guid>https://init.best/tags/mybatis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://init.best/tags/java/</link>
+      <pubDate>Thu, 02 Sep 2021 01:01:03 +0800</pubDate>
+      
+      <guid>https://init.best/tags/java/</guid>
       <description></description>
     </item>
     
@@ -34,15 +43,6 @@
       <pubDate>Mon, 16 Aug 2021 23:06:44 +0800</pubDate>
       
       <guid>https://init.best/tags/plan/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://init.best/tags/java/</link>
-      <pubDate>Mon, 16 Aug 2021 22:40:45 +0800</pubDate>
-      
-      <guid>https://init.best/tags/java/</guid>
       <description></description>
     </item>
     
