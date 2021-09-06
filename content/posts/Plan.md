@@ -34,7 +34,7 @@ editPost:
 summary: "My Plan Record"
 ---
 20210803  读书计划 
-- [ ] ***Java 8 Action***
+- [x] ***Java 8 in Action***
 
 20210808 观影计划  
 
@@ -45,3 +45,10 @@ summary: "My Plan Record"
 20210815 读书计划 
 
 - [ ] ***MySQL技术内幕*** 
+
+20210907 9月计划
+
+- [ ] ***Redis设计与实现***
+
+- [ ] Mybatis源码阅读
+
