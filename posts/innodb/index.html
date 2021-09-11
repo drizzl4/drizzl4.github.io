@@ -159,7 +159,7 @@ InnoDB
 <p>缓冲池配置：</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-mysql data-lang=mysql><span style=color:#66d9ef>SHOW</span> VARIABLES <span style=color:#e6db74>&#39;innodb_buffer_poll_size&#39;</span>
 </code></pre></div><p>缓冲池内存结构：</p>
-<p><img loading=lazy src=/static/images/55bb6bb3N9ca9bc2f.jpg alt=img>
+<p><img loading=lazy src=/images/55bb6bb3N9ca9bc2f.jpg alt=img>
 </p>
 <blockquote>
 <p>从InnoDB 1.0.x版本开始，允许有多个缓冲池实例。每个页根据哈希值平均分配到不同缓冲池实例中。这样做的好处是减少数据库内部的资源竞争，增加数据库的并发处理能力。可以通过参数innodb_buffer_pool_instances来进行配置，该值默认为1。</p>
