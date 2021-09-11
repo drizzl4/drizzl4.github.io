@@ -211,8 +211,9 @@ int sum = numbers.stream().reduce(0, (a, b) -> a+b);
 //相乘
 int product = numbers.stream().reduce(1,(a, b) -> a*b);
 ```
-![image-20210819143355223](/static/images/image-20210819143355223.png)
+![image-20210819143355223](/images/image-20210819143355223.png)
 Java 8中，Integer类增加sum静态方法来求和
+
 ```java
 int sum = numbers.stream().reduce(0, Integer::sum);
 ```
@@ -226,12 +227,12 @@ Optional<Integer> sum = numbers.stream().reduce((a, b) -> a+b);
 //最大值
 Optional<Integer> max = number.stream().reduce(Integer::max);
 ```
-![](https://init.best/post-images/1628839778350.png)
+![image-20210911160446202](/images/image-20210911160446202.png)
 ```java
 Optional<Integer> min = number.stream().reduce(Integer::min);
 ```
 ## 小总结
-![image-20210819143428774](/static/images/image-20210819143428774.png)
+![image-20210819143428774](/images/image-20210819143428774.png)
 ## 数值流
 Java 8引入三个原始类型特化流接口，IntStream、DoubleStream、LongStream. 从而避免暗中装箱的成本。  
 ### 映射到数值流
@@ -550,4 +551,4 @@ System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism","12");
 
 5. 考虑终端操作中合并步骤的代价是大是小(例如Collector中的combiner方法)。如果这一步代价很大，那么组合每个子流产生的部分结果所付出的代价就可能会超出通过并行流得到的性能提升。
 
-   ![image-20210901231238662](/static/images/image-20210901231238662.png)
+   ![image-20210901231238662](/images/image-20210901231238662.png)

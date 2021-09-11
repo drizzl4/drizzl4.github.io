@@ -120,7 +120,7 @@ Optional<Person> optPerson = Optional.of(person);
 
 > optPerson是Optional<Person>类型的 变量， 调用map方法应该没有问题。但getCar返回的是一个Optional<Car>类型的对象(如代 码清单10-4所示)，这意味着map操作的结果是一个Optional<Optional<Car>>类型的对象。因 此，它对getInsurance的调用是非法的，因为最外层的optional对象包含了另一个optional 对象的值，而它当然不会支持getInsurance方法。
 
-![image-20210906214507010](/static/images/image-20210906214507010.png)
+![image-20210906214507010](/images/image-20210906214507010.png)
 
 **使用flatMap实现：**
 
@@ -135,7 +135,7 @@ public String getCarInsuranceName(Optional<Person> person) {
 
 最终返回的为Optional<String>:
 
-![image-20210906233028644](/static/images/image-20210906233028644.png)
+![image-20210906233028644](/images/image-20210906233028644.png)
 
 ### 默认行为及解引用**Optional**对象
 
@@ -208,9 +208,9 @@ optInsurance.filter(insurance ->
 
 ### 总结
 
-![image-20210906235251482](/static/images/image-20210906235251482.png)
+![image-20210906235251482](/images/image-20210906235251482.png)
 
-![image-20210906235300902](/static/images/image-20210906235300902.png)
+![image-20210906235300902](/images/image-20210906235300902.png)
 
 ## 实际使用
 
