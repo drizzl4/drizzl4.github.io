@@ -40,7 +40,7 @@ summary: "About InnoDB"
 
 ## InnoDB体系架构
 
-![img](/static/images/55bb6bb1N19e97000.jpg)
+![img](/images/55bb6bb1N19e97000.jpg)
 
 ### 后台线程
 
