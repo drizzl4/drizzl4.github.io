@@ -9,7 +9,25 @@
       <link>https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 06 Sep 2021 11:18:35 +0800</lastBuildDate><atom:link href="https://init.best/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Sep 2021 21:51:03 +0800</lastBuildDate><atom:link href="https://init.best/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>InnoDB</title>
+      <link>https://init.best/tags/innodb/</link>
+      <pubDate>Tue, 07 Sep 2021 21:51:03 +0800</pubDate>
+      
+      <guid>https://init.best/tags/innodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mysql</title>
+      <link>https://init.best/tags/mysql/</link>
+      <pubDate>Tue, 07 Sep 2021 21:51:03 +0800</pubDate>
+      
+      <guid>https://init.best/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Mybatis</title>
       <link>https://init.best/tags/mybatis/</link>
@@ -25,15 +43,6 @@
       <pubDate>Thu, 02 Sep 2021 01:01:03 +0800</pubDate>
       
       <guid>https://init.best/tags/java/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mysql</title>
-      <link>https://init.best/tags/mysql/</link>
-      <pubDate>Tue, 31 Aug 2021 00:28:54 +0800</pubDate>
-      
-      <guid>https://init.best/tags/mysql/</guid>
       <description></description>
     </item>
     

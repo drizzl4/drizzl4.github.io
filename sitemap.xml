@@ -2,14 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://init.best/posts/plan/</loc>
+    <loc>https://init.best/posts/2021-plan/</loc>
     <lastmod>2021-08-16T23:06:44+08:00</lastmod>
   </url><url>
     <loc>https://init.best/categories/</loc>
-    <lastmod>2021-09-06T11:18:35+08:00</lastmod>
+    <lastmod>2021-09-07T21:51:03+08:00</lastmod>
   </url><url>
     <loc>https://init.best/</loc>
-    <lastmod>2021-09-06T11:18:35+08:00</lastmod>
+    <lastmod>2021-09-07T21:51:03+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/tags/innodb/</loc>
+    <lastmod>2021-09-07T21:51:03+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/categories/innodb/</loc>
+    <lastmod>2021-09-07T21:51:03+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/posts/innodb/</loc>
+    <lastmod>2021-09-07T21:51:03+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/tags/mysql/</loc>
+    <lastmod>2021-09-07T21:51:03+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/categories/mysql/</loc>
+    <lastmod>2021-09-07T21:51:03+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/posts/</loc>
+    <lastmod>2021-09-07T21:51:03+08:00</lastmod>
+  </url><url>
+    <loc>https://init.best/tags/</loc>
+    <lastmod>2021-09-07T21:51:03+08:00</lastmod>
   </url><url>
     <loc>https://init.best/tags/mybatis/</loc>
     <lastmod>2021-09-06T11:18:35+08:00</lastmod>
@@ -18,12 +39,6 @@
     <lastmod>2021-09-06T11:18:35+08:00</lastmod>
   </url><url>
     <loc>https://init.best/posts/mybatis-return-empty/</loc>
-    <lastmod>2021-09-06T11:18:35+08:00</lastmod>
-  </url><url>
-    <loc>https://init.best/posts/</loc>
-    <lastmod>2021-09-06T11:18:35+08:00</lastmod>
-  </url><url>
-    <loc>https://init.best/tags/</loc>
     <lastmod>2021-09-06T11:18:35+08:00</lastmod>
   </url><url>
     <loc>https://init.best/tags/java/</loc>
@@ -36,12 +51,6 @@
     <lastmod>2021-09-02T01:01:03+08:00</lastmod>
   </url><url>
     <loc>https://init.best/posts/mybatis-connects-mysql/</loc>
-    <lastmod>2021-08-31T00:28:54+08:00</lastmod>
-  </url><url>
-    <loc>https://init.best/tags/mysql/</loc>
-    <lastmod>2021-08-31T00:28:54+08:00</lastmod>
-  </url><url>
-    <loc>https://init.best/categories/mysql/</loc>
     <lastmod>2021-08-31T00:28:54+08:00</lastmod>
   </url><url>
     <loc>https://init.best/about/</loc>

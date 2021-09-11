@@ -9,7 +9,16 @@
       <link>https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 31 Aug 2021 00:28:54 +0800</lastBuildDate><atom:link href="https://init.best/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Sep 2021 21:51:03 +0800</lastBuildDate><atom:link href="https://init.best/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>InnoDB</title>
+      <link>https://init.best/posts/innodb/</link>
+      <pubDate>Tue, 07 Sep 2021 21:51:03 +0800</pubDate>
+      
+      <guid>https://init.best/posts/innodb/</guid>
+      <description>About InnoDB</description>
+    </item>
+    
     <item>
       <title>Mybatis connects Mysql</title>
       <link>https://init.best/posts/mybatis-connects-mysql/</link>
