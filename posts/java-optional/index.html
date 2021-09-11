@@ -176,7 +176,7 @@ Optional<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt
 <blockquote>
 <p>optPerson是Optional类型的 变量， 调用map方法应该没有问题。但getCar返回的是一个Optional类型的对象(如代 码清单10-4所示)，这意味着map操作的结果是一个Optional&lt;Optional>类型的对象。因 此，它对getInsurance的调用是非法的，因为最外层的optional对象包含了另一个optional 对象的值，而它当然不会支持getInsurance方法。</p>
 </blockquote>
-<p><img loading=lazy src=/static/images/image-20210906214507010.png alt=image-20210906214507010>
+<p><img loading=lazy src=/images/image-20210906214507010.png alt=image-20210906214507010>
 </p>
 <p><strong>使用flatMap实现：</strong></p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getCarInsuranceName</span><span style=color:#f92672>(</span>Optional<span style=color:#f92672>&lt;</span>Person<span style=color:#f92672>&gt;</span> person<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
@@ -186,7 +186,7 @@ Optional<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt
     <span style=color:#f92672>.</span><span style=color:#a6e22e>orElse</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Unknown&#34;</span><span style=color:#f92672>);</span>
 <span style=color:#f92672>}</span>
 </code></pre></div><p>最终返回的为Optional:</p>
-<p><img loading=lazy src=/static/images/image-20210906233028644.png alt=image-20210906233028644>
+<p><img loading=lazy src=/images/image-20210906233028644.png alt=image-20210906233028644>
 </p>
 <h3 id=默认行为及解引用optional对象>默认行为及解引用<strong>Optional</strong>对象<a hidden class=anchor aria-hidden=true href=#默认行为及解引用optional对象>#</a></h3>
 <blockquote>
@@ -244,9 +244,9 @@ optInsurance<span style=color:#f92672>.</span><span style=color:#a6e22e>filter</
                    <span style=color:#e6db74>&#34;CambridgeInsurance&#34;</span><span style=color:#f92672>.</span><span style=color:#a6e22e>equals</span><span style=color:#f92672>(</span>insurance<span style=color:#f92672>.</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>()))</span>
   					<span style=color:#f92672>.</span><span style=color:#a6e22e>ifPresent</span><span style=color:#f92672>(</span>x <span style=color:#f92672>-&gt;</span> System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;ok&#34;</span><span style=color:#f92672>));</span>
 </code></pre></div><h3 id=总结>总结<a hidden class=anchor aria-hidden=true href=#总结>#</a></h3>
-<p><img loading=lazy src=/static/images/image-20210906235251482.png alt=image-20210906235251482>
+<p><img loading=lazy src=/images/image-20210906235251482.png alt=image-20210906235251482>
 </p>
-<p><img loading=lazy src=/static/images/image-20210906235300902.png alt=image-20210906235300902>
+<p><img loading=lazy src=/images/image-20210906235300902.png alt=image-20210906235300902>
 </p>
 <h2 id=实际使用>实际使用<a hidden class=anchor aria-hidden=true href=#实际使用>#</a></h2>
 <h3 id=用optional封装可能为null的值>用<strong>Optional</strong>封装可能为<strong>null</strong>的值<a hidden class=anchor aria-hidden=true href=#用optional封装可能为null的值>#</a></h3>
