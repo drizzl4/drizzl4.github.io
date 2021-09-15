@@ -195,6 +195,8 @@ InnoDB存储引擎首先将重做日志信息先放入到这个缓冲区，然�
 
 ## Checkpoint技术
 
+### 前言
+
 缓冲池是为了协调CPU速度与磁盘速度的差距，因此对页的操作首先是在缓冲池中完成的，如果一条DML语句，入Update或Delete改变了页中的记录，那么此时页是脏的   
 
 缓冲池中的页比磁盘的新，缓冲池将新版本的页从缓冲池刷新到磁盘  
@@ -218,4 +220,132 @@ Checkpoint（检查点）技术的目的是解决以下几个问题：
  1. 缩短数据库的恢复时间
  2. 缓冲池不够用时，将脏页刷新到磁盘
  3. 重做日志不可用时，刷新脏页
+
+对于InnoDB存储引擎而言，其是通过LSN（Log Sequence Number）来标记版本的。而LSN是8字节的数字，其单位是字节。每个页有LSN，重做日志中也有LSN，Checkpoint也有LSN。可以通过命令SHOW ENGINE INNODB STATUS来观察：
+
+```mysql
+mysql＞SHOW ENGINE INNODB STATUS\G;
+......
+---
+LOG
+---
+Log sequence number 92561351052
+Log flushed up to 92561351052
+Last checkpoint at 92561351052
+......
+```
+
+### Checkpoint 分类
+
+CheckPoint 分为：
+
+1. Sharp Checkpoint
+2. Fuzzy Checkpoint
+
+#### Sharp Checkpoint
+
+Sharp Checkpoint发生在数据库关闭时将所有的脏页都刷新回磁盘，这是默认的工作方式，即参数innodb_fast_shutdown=1。
+
+#### Fuzzy Checkpoint
+
+但是若数据库在运行时也使用Sharp Checkpoint，那么数据库的可用性就会受到很大的影响。故在InnoDB存储引擎内部使用Fuzzy Checkpoint进行页的刷新，即只刷新一部分脏页，而不是刷新所有的脏页回磁盘。  
+
+在Innodb可能发生的Fuzzy Checkpoint:
+
+1. Master Thread Checkpoint(异步执行）
+
+2. FLUSH_LRU_LIST Checkpoint
+
+   FLUSH_LRU_LIST Checkpoint是因为InnoDB存储引擎需要保证LRU列表中需要有差不多100个空闲页可供使用。在InnoDB1.1.x版本之前，需要检查LRU列表中是否有足够的可用空间操作发生在用户查询线程中，显然这会阻塞用户的查询操作。倘若没有100个可用空闲页，那么InnoDB存储引擎会将LRU列表尾端的页移除。如果这些页中有脏页，那么需要进行Checkpoint，而这些页是来自LRU列表的，因此称为FLUSH_LRU_LIST Checkpoint。
+
+   而从MySQL 5.6版本，也就是InnoDB1.2.x版本开始，这个检查被放在了一个单独的Page Cleaner线程中进行，并且用户可以通过参数innodb_lru_scan_depth控制LRU列表中可用页的数量，该值默认为1024
+
+3. Async/Sync Flush Checkpoint
+
+   Async/Sync Flush Checkpoint指的是重做日志文件不可用的情况，这时需要强制将一些页刷新回磁盘，而此时脏页是从脏页列表中选取的。若将已经写入到重做日志的LSN记为redo_lsn，将已经刷新回磁盘最新页的LSN记为checkpoint_lsn
+
+4. Dirty Page too much Checkpoint
+
+   最后一种Checkpoint的情况是Dirty Page too much，即脏页的数量太多，导致InnoDB存储引擎强制进行Checkpoint。其目的总的来说还是为了保证缓冲池中有足够可用的页。其可由参数innodb_max_dirty_pages_pct控制
+
+### Master Thread工作方式
+
+#### InnoDB 1.0.x版本之前的Master Thread
+
+Master Thread具有最高的线程优先级，内部含有多个循环：主循环（loop）、后台循环（backgroup loop）、刷新循环（flush loop）、暂停循环（sunpend loop），其会在运行过程切换。
+
+##### loop循环
+
+大多数的数据操作是在loop循环中，其又包含两部分：每秒钟的操作和每10秒的操作
+
+```java
+//伪代码
+loop：
+for(int i=0;i＜10;i++){
+do thing once per second
+sleep 1 second if necessary
+}
+do things once per ten seconds
+goto loop;
+}
+```
+
+每秒操作包含：  
+
+1. 日志缓冲刷新到磁盘，即使这个事务还没有提交（总是）
+2. 合并插入缓冲（可能）
+3. 至多刷新100个InnoDB的缓冲池中的脏页到磁盘（可能）
+4. 如果当前没有用户活动，则切换到background loop（可能）
+
+合并插入缓冲发生的情况：InnoDB存储引擎会判断当前一秒内发生的IO次数是否小于5次，如果小于5次，InnoDB认为当前的IO压力很小，可以执行合并插入缓冲的操作。  
+
+刷新100个InnoDB的缓冲池情况：InnoDB存储引擎通过判断当前缓冲池中脏页的比例（buf_get_modified_ratio_pct）是否超过了配置文件中innodb_max_dirty_pages_pct这个参数（默认为90，代表90%），如果超过了这个阈值，InnoDB存储引擎认为需要做磁盘同步的操作，将100个脏页写入磁盘中。  
+
+每10秒操作包含：  
+
+1. 刷新100个脏页到磁盘（可能的情况下）
+2. 合并至多5个插入缓冲（总是）
+3. 将日志缓冲刷新到磁盘（总是）
+4. 删除无用的Undo页（总是）
+5. 刷新100个或者10个脏页到磁盘（总是）
+
+InnoDB存储引擎会先判断过去10秒之内磁盘的IO操作是否小于200次，如果是，InnoDB存储引擎认为当前有足够的磁盘IO操作能力，因此将100个脏页刷新到磁盘。接着，InnoDB存储引擎会合并插入缓冲。不同于每秒一次操作时可能发生的合并插入缓冲操作，这次的合并插入缓冲操作总会在这个阶段进行。之后，InnoDB存储引擎会再进行一次将日志缓冲刷新到磁盘的操作。
+
+##### background loop
+
+若当前没有用户活动或数据库关闭，就会切换到这个循环。  
+
+1. 删除无用的Undo页（总是）
+2. 合并20个插入缓冲（总是）
+3. 跳回到主循环（总是）
+4. 不断刷新100个页直到符合条件（可能，跳转到flush loop中完成）
+
+若flush loop中也没有什么事情可以做了，InnoDB存储引擎会切换到suspend__loop，将Master Thread挂起，等待事件的发生。  
+
+若用户启用（enable）了InnoDB存储引擎，却没有使用任何InnoDB存储引擎的表，那么Master Thread总是处于挂起的状态。
+
+#### InnoDB1.2.x版本之前的Master Thread
+
+对之前版本的优化：  
+
+1. InnoDB Plugin（从InnoDB1.0.x版本开始）提供了参数innodb_io_capacity，用来表示磁盘IO的吞吐量，默认值为200。对于刷新到磁盘页的数量，会按照innodb_io_capacity的百分比来进行控制。
+
+   规则：  
+
+   ​		(1). 在合并插入缓冲时，合并插入缓冲的数量为innodb_io_capacity值的5%  
+
+   ​		(2). 在从缓冲区刷新脏页时，刷新脏页的数量为innodb_io_capacity   
+
+2. 从InnoDB 1.0.x版本开始，innodb_max_dirty_pages_pct默认值变为了75，和Google测试的80比较接近。
+3. InnoDB 1.0.x版本带来的另一个参数是innodb_adaptive_flushing（自适应地刷新）,InnoDB存储引擎会通过一个名为buf_flush_get_desired_flush_rate的函数来判断需要刷新脏页最合适的数量。粗略地翻阅源代码后发现buf_flush_get_desired_flush_rate通过判断产生重做日志（redo log）的速度来决定最合适的刷新脏页数量。因此，当脏页的比例小于innodb_max_dirty_pages_pct时，也会刷新一定量的脏页。  
+
+#### InnoDB 1.2.x版本的Master Thread
+
+```java
+// 伪代码
+if InnoDB is idle
+srv_master_do_idle_tasks();
+else
+srv_master_do_active_tasks();
+```
 
