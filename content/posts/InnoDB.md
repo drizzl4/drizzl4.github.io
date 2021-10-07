@@ -268,13 +268,13 @@ Sharp Checkpoint发生在数据库关闭时将所有的脏页都刷新回磁盘�
 
    最后一种Checkpoint的情况是Dirty Page too much，即脏页的数量太多，导致InnoDB存储引擎强制进行Checkpoint。其目的总的来说还是为了保证缓冲池中有足够可用的页。其可由参数innodb_max_dirty_pages_pct控制
 
-### Master Thread工作方式
+## Master Thread工作方式
 
-#### InnoDB 1.0.x版本之前的Master Thread
+### InnoDB 1.0.x版本之前的Master Thread
 
 Master Thread具有最高的线程优先级，内部含有多个循环：主循环（loop）、后台循环（backgroup loop）、刷新循环（flush loop）、暂停循环（sunpend loop），其会在运行过程切换。
 
-##### loop循环
+#### loop循环
 
 大多数的数据操作是在loop循环中，其又包含两部分：每秒钟的操作和每10秒的操作
 
@@ -311,7 +311,7 @@ goto loop;
 
 InnoDB存储引擎会先判断过去10秒之内磁盘的IO操作是否小于200次，如果是，InnoDB存储引擎认为当前有足够的磁盘IO操作能力，因此将100个脏页刷新到磁盘。接着，InnoDB存储引擎会合并插入缓冲。不同于每秒一次操作时可能发生的合并插入缓冲操作，这次的合并插入缓冲操作总会在这个阶段进行。之后，InnoDB存储引擎会再进行一次将日志缓冲刷新到磁盘的操作。
 
-##### background loop
+#### background loop
 
 若当前没有用户活动或数据库关闭，就会切换到这个循环。  
 
@@ -324,7 +324,7 @@ InnoDB存储引擎会先判断过去10秒之内磁盘的IO操作是否小于200�
 
 若用户启用（enable）了InnoDB存储引擎，却没有使用任何InnoDB存储引擎的表，那么Master Thread总是处于挂起的状态。
 
-#### InnoDB1.2.x版本之前的Master Thread
+### InnoDB1.2.x版本之前的Master Thread
 
 对之前版本的优化：  
 
@@ -339,7 +339,7 @@ InnoDB存储引擎会先判断过去10秒之内磁盘的IO操作是否小于200�
 2. 从InnoDB 1.0.x版本开始，innodb_max_dirty_pages_pct默认值变为了75，和Google测试的80比较接近。
 3. InnoDB 1.0.x版本带来的另一个参数是innodb_adaptive_flushing（自适应地刷新）,InnoDB存储引擎会通过一个名为buf_flush_get_desired_flush_rate的函数来判断需要刷新脏页最合适的数量。粗略地翻阅源代码后发现buf_flush_get_desired_flush_rate通过判断产生重做日志（redo log）的速度来决定最合适的刷新脏页数量。因此，当脏页的比例小于innodb_max_dirty_pages_pct时，也会刷新一定量的脏页。  
 
-#### InnoDB 1.2.x版本的Master Thread
+### InnoDB 1.2.x版本的Master Thread
 
 ```java
 // 伪代码
@@ -348,4 +348,18 @@ srv_master_do_idle_tasks();
 else
 srv_master_do_active_tasks();
 ```
+
+## InnoDB关键特性
+
+InnoDb存储引擎的关键特性包括：  
+
+1. 插入缓冲(Insert Buffer)
+2. 两次写(Double Write)
+3. 自适应哈希索引(Adaptive Hash Index)
+4. 异步(Async IO)
+5. 刷新邻接页(Flush Neighbor Page)
+
+### 插入缓冲(Insert Buffer)
+
+Insert Buffer并非是缓冲池中的部分操作，而是和数据页一样，是物理页的一个组成部分  
 
