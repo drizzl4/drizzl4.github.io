@@ -1,0 +1,366 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>数据密集型应用系统设计笔记 | drizzl4</title>
+<meta name=keywords content="note">
+<meta name=description content="Don't be serious">
+<meta name=author content="drizzl4">
+<link rel=canonical href=https://canonical.url/to/page>
+<meta name=google-site-verification content="XYZabc">
+<meta name=yandex-verification content="XYZabc">
+<meta name=msvalidate.01 content="XYZabc">
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.9f1d947375927e9847272b1f4e9be81336f539e513bf04d52cade31f81cad1af.css integrity="sha256-nx2Uc3WSfphHJysfTpvoEzb1OeUTvwTVLK3jH4HK0a8=" rel="preload stylesheet" as=style>
+<link rel=preload href=/apple-touch-icon.png as=image>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://init.best/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=16x16 href=https://init.best/%3Clink%20/%20abs%20url%3E>
+<link rel=icon type=image/png sizes=32x32 href=https://init.best/%3Clink%20/%20abs%20url%3E>
+<link rel=apple-touch-icon href=https://init.best/%3Clink%20/%20abs%20url%3E>
+<link rel=mask-icon href=https://init.best/%3Clink%20/%20abs%20url%3E>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.87.0">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:#1d1e20;--entry:#2e2e33;--primary:rgba(255, 255, 255, 0.84);--secondary:rgba(255, 255, 255, 0.56);--tertiary:rgba(255, 255, 255, 0.16);--content:rgba(255, 255, 255, 0.74);--hljs-bg:#2e2e33;--code-bg:#37383e;--border:#333}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="数据密集型应用系统设计笔记">
+<meta property="og:description" content="Don't be serious">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://init.best/posts/%E6%95%B0%E6%8D%AE%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%AC%94%E8%AE%B0/">
+<meta property="og:image" content="https://init.best/%3Cimage%20path/url%3E"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2022-03-30T00:17:51+08:00">
+<meta property="article:modified_time" content="2022-03-30T00:17:51+08:00"><meta property="og:site_name" content="drizzl4">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="https://init.best/%3Cimage%20path/url%3E">
+<meta name=twitter:title content="数据密集型应用系统设计笔记">
+<meta name=twitter:description content="Don't be serious">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://init.best/posts/"},{"@type":"ListItem","position":2,"name":"数据密集型应用系统设计笔记","item":"https://init.best/posts/%E6%95%B0%E6%8D%AE%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%AC%94%E8%AE%B0/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"数据密集型应用系统设计笔记","name":"数据密集型应用系统设计笔记","description":"Don't be serious","keywords":["note"],"articleBody":"第一章 可扩展与可维护的应用系统 一、什么是“数据密集型应用系统”？ 当今许多新型应用都属于数据密集型( data-intensi ve)，而不是计算密集型 (compute-intensive)。对于这些类型应用， CPU的处理能力往往不是第一限制性因素，关键在于数据量、数据的复杂度及数据的快速多变性。\n而我们平时遇到的大部分系统都是数据密集型，其过程都是代码访问内存、数据库中的数据，经过业务逻辑处理，最后返回给用户。\n1、应用系统一般包含的模块  数据库:用以存储数据，这样之后应用可以再次面问。 高速缓存 : 缓存那些复杂或操作代价昂贵的结果，以加快下一次访问。 索引 : 用户可以按关键字搜索数据井支持各种过掳 。 流式处理:持续发送消息至另 一 个进程，处理采用异步方式。 批处理 : 定期处理大量的累积数据。  2、通用的系统架构 3、软件系统极为重要的三个问题   可靠性 容忍硬件/软件失效，人为的错误\n  可扩展性 可扩展性是用来描述系统应对负载增加能力\n  可维护型\n可运维、简单、可演化性\n  3.1 延迟与响应时间的不同  响应时间为请求时间+来回网络延迟+排队延迟 延迟为请求花费在处理上的时间  3.2 百分位数 通常平均响应时间的计算为将n个值相加并除以n，然后因为请求不同或请求数据不同，无法告诉有多少用户实际经历了多少延迟。\n因此最好使用百分位数( percen ti Jes) 。如果已经搜集到了响应 时间 信息，将其从最 快到最慢排序，中位数( median)就是列表中间的响应时间。例如，如果中位数响应 时间为200 ms，那意味着有一半的请求响应不到200 ms，而另一半请求则需要更长的时间。\n中位数指标非常适合描述多少用户需要等待多长时间: 一半的用户请求的服务时间少 于中位数响应时间，另 一半则多于中位数的时间。因 此中 位数也称为 50百分位数，有 时缩 写为 p50。\n采用较高的响应时间百分位数(tail latencies，尾部延时或长尾效应)很重要，因为它们直接影响用户的总体服务体验。亚马逊注意到，响应时间每增加100ms，销售额就会下降1%，其他研究则表明，1s的延时增加等价于让客户满意度下降16%。\n3.3 批处理系统与线性系统 在批处理系统中，我们通常关心吞吐量(throughput)，即每秒可处理的记录条数，或者在某指定数据集上运行作业所需的总时间；而在线性系统中通常更看重服务的响应时间(response time)，即客户端从发出请求到接收响应之间的间隔。\n第二章 数据模型与查询语言 本章大量篇幅是对各种数据模型的介绍，开阔视野，在平常的开发中，对于数据存储的选择还是需要进一步调研，选择合适的数据库。\n一、数据库模型 1.网络模型（已经被抛弃） CODASYL模型是层次模型的推广。在层次模型的树结构中 ，每个记录只有一个父结点;而在网络模型中， 一个记录可能有多个父结点 。 例如， “大西雅图地区”可能有 一个记录，居住在该地区的每个用户都链接指向 它。从而支持对多对一和多对多的关 系进行建模。\n其访问方式，像是遍历链表 : 从链表的头部开始， 一次查看一个记 录，直到找到所需的记录。 但是在一个多对多关系的世界里，存在多条不同的路径通 向相同的记录，使用网络模型的程序员必须在脑海中设毡跟踪这些不同的访问路径。\n2.关系模型 关系模型所做的则是定义了所有数据的格式:关系(表)只是元组(行) 的集合\n3.文档数据库 文档数据库是某种方式的层次模型 : 即在其父记录中保存了嵌套记录，而不是存 储在单独的表中。\n二、一对多 以user表为例，其实现方式：\n 在传统的SQL模型(SQL: 1999之前)中， 最常见的规范化表示是将职位、教育 和联系信息放在单独的 表中 ， 并二使用外键引用 users表。 之后的 SQL标准增加了对结构化数据类型和 XML数据的支持。这允许将多值数据存储在单行内 ，并支持在这些文档中查询和索引。 一些数据库也支持JSON数据类型，例如IBM DB2、 MySQL和PostgreSQL。 第三个选项是将工作、教育和联系信息编码为JSON或XML文档，将其存储在数 据库的文本列中，并由应用程序解释其结构和内容。对于此方峙，通常不能使用 数据库查询该编码列中的值。  在存储用户的部分信息，例如：地区或行业，使用对应的码值，而不是字符串进行存储，含义：\n 避免歧义(例如，如果存在一些同名的城市)。 易于更新:名字只保存一次，因此，如果需要改变，可以很容易全面更新。 本地化支持:当网站被翻译成其他语言时，标准化的列表可以方便本地化，因此 地 区和行业可以用 查看者的母语来显示 。 更好的搜索支持:例如，搜索华盛顿 州的慈善 家可以匹配到过个简历，这是因为地区列表可以将西雅图属于华盛顿的信息编码进来(而从“大西雅图地区”字符 串中并不能看出来西雅图属于华盛顿) 。  三、关系数据库与文档数据库 如果应用数据具有类似文档的结构(即一对多关系树，通常一次加载整个树) ， 那么使用文档模型更为合适。而关系型模型则倾向于某种数据分解，它把文档结构分解为多个表，有可能使得模式更为笨重，以及不必要的应用代码复杂化。\n文档模型也有 一 定的局限性：例如， 不能直接引用文档中的嵌套项，而需要说“用户 251的职位列表中的第二项” (非常类似于层次模型中的访问路径) 。然而，只要文档嵌套不太深，这通常不是问题。\n如果程序中确实存在多对多的关系结构，那么使用文档类型数据库就不合适了，因为这需要你在应用层建立对应的联结关系，使得代码逻辑更加复杂。\n四、额外收获  ALTER TABLE时，会将整张表复制，所以当表很大的时候，可能需要几分钟甚至几个小时的时间停机。 在大表上进行update语句时，可以采用懒加载的方式，只有当调用的时候才进行填充。 文档数据库查询数据局部性：如果数据被划分在多个表里，则需要多次索引查找来检索数据，更多的磁盘I/O操作，花费更多的时间。当文档以JSON、XML或者二进制的方式进行存储，在访问信息的时候，会访问大部分内容，则数据库通常会加载整个文档，如果应用只是访问其中的一小部分，则对于大型文档数据来讲就有些浪费。对文档进行更新时，通常会重写整个文档，而只有修改量不改变惊文档大小时， 原地覆盖更新才更有效。因此，通常建议文档应该尽量小且避免写入时增加文档大小。 这些性能方面的不利因素大大限制了文档数据库的适用场景。  第三章 数据存储与检索 一、索引 为了高效地查询数据库中的值,需要新的数据结构：索引。索引会加速查询速度，但是会使得写入速度变慢。\n下面都是讨论的key-value索引\n1.哈希索引 键值对的数据结构[key,value],最长见的如 HashMap。 现在，假设数据存储全部采用追加式的文件组成。\n 用户将数据存储在硬盘上，并且返回文件的偏移量， 将文件的偏移量在内存更新 当用户查询具体的key值时，找到文件的偏移量，读取文件数据，返回对应的值  优点：\n 基于内存的 key 寻址会非常快，hash(key)的时间复杂度为 1. 只需要一次磁盘寻址，快速的将数据加载到内存 可以利用文件系统的缓存无需 IO 开销  缺点：\n 我们采用的是追加读模式，可能存在磁盘用尽 随着 key 的增加，内存容量也会成为一个瓶颈 机器宕机重启内存数据丢失 并发写入时的问题，因为我们是以追加写的方式将数据存储到磁盘，无法评估每个线程写入的数据量。 数据的删除：还是由于数据在磁盘是以追加写的模式存储我们无法直接删除文件中的数据段  如何解决磁盘用尽？ 一个好的解决方案是将日志分解成一定大小的段，当文件达到一定大小时就关闭它，井将后续写入到新 的段文件中。然后可以在这些段上执行压缩，压缩意味着在日志中丢弃重复的键，并且只保留每个键最近的更新。\n数据删除 可以在用户提交删除申请的时候记录下来，在文件执行合并、压缩操作时在执行删除操作\n2.SSTables 在哈希索引中，对日志进行压缩使用的排序规则为：按写入顺序排列，并且对于出现在日志中的同一个键，后出现的值优于之前的值。\n现在，将key-value的排序规则改为，按键排序，这种排序称为“排序字符表”，或简称SSTable。它要求每个键在每个合并的段文件中只能出现一次(压缩过程已经确保了)。\n优点：\n 合并段更加简单高效，即使文件大于可用内存。并发读取多个输入段文件，把最小的键按照排列顺序拷贝到输出文件中，如此往复，最终实现段按照键的顺序进行合并 根据排序的特性，在进行key查找时，不需要从头开始遍历，例如，key1 根据排序的特性，实现稀疏索引，节省磁盘空间，压缩减少I\\O带宽占用  SSTables的构建：\n 当写入时，将数据存入到内存当中，即内存表。 当内存表大于某个阀值，则将其写入到磁盘中，因为SSTable按键排序，所以写入速度很快。 在写入磁盘的同时，写入可以同时工作，数据将会写入到一个新的内存表实例中。 在查找数据时，首先在内存表中查找，然后在最新的磁盘段文件中查找，其次是次新的段文件，以此类推 后台进程周期性地执行段合并与压缩过程，以合并多个段文件，并丢弃那些已被覆盖或删除的值 。  3、B-trees B-Tree 将数据库分解成固定大小的快或者页，传统上为 4KB,页是内部的最小读写单元。\n每个页面都可以使用地址或者位置进行标识，这样可以让一个页面引用另一个页面，类似指针，不过是指向磁盘地址，而不是内存。通过页面就可以构造如上所示的树状结构。\n某一个页被指定为树的根，每次的查找都是从这个根开始。该页面包含若干个键和对子页的引用。每个孩子都负责一个连续范围内的查找，相邻引用之间的键可以只是这些范围之间的边界。\n  **键的查找:**从根节点开始，根据区间查找，一层层往下查找知道找到目标值或者返回 null\n  **键的更新:**首先查找到包含该键的页节点，将页节点从磁盘读回内存[这里也有可能由于缓存的原因，直接从内存中读取]然后更新键再写回磁盘\n  **键的插入：**首先需要找到该键所属范围的页节点，将新建插入其中，但是如果该页节点没有足够的空间来容纳该新键则需要进行分裂，将原来的页节点分裂为两个半满的页，并且其父节点也需要更新以包含分裂之后的新的键范围。\n在页分裂时如果写入一半系统崩溃，那么会导致出现孤儿页，从而导致索引破坏，为避免这种情况，通常会在B-tree外添加额外的磁盘数据结构：预写日志（WAL），也称为重做日志。预写日志仅支持追加写入，因此速度很快，它可以在系统崩溃时恢复数据。\n  B-tree优化方案\n 一些数据库不直接覆盖页，也不用WAL恢复数据，而是使用写时复制方案：修改的页被写入不同位置，父页创建一个新版本并指向新的位置，这种方案同时有益于并发控制 保存键的缩略信息而不是完整信息，可以节省页空间，从而把更多的键压入页中，实现更高的分支因子，进而减少层数。 维护树的布局，让相邻叶子节点按顺序保存在磁盘上，通过范围读取实现预加载。但是随着树的增长，维护这个顺序也越来越难。 在相邻的兄弟节点之间加入指针链接，可以直接跳到相邻节点不需要回到父节点再次跳转  4、索引即数据 在某些情况下，从索引到堆文件的额外跳转对于读取来说意味着太多的性能损失， 因此可能希望将索引行直接存储在索引中。这被称为聚集索引。例如，在 MySQL InnoDB存储引擎中，表的主键始终是聚集索引， 二级索引引用主键（ 而不是堆文件位置) 。 在SQL Server中，可以为每个表指定一个聚集索引。\n二、数据处理 1、数据仓库 2、星型与雪花分析模式 Fact_sales为事实表，事实表的每一行表示在特定时间发生的事件(这里， 每一行代表客户购买的一个产品 ) 。其他列可能会 引用其他表的外键，称为维度表，例如：dim_product。\n雪花模式为星型模式的变体，在维度表中进行进一步的细分，例如：产品的品牌在另一张单独的表中。\n第四章 数据编码与演化 ","wordCount":"233","inLanguage":"en","image":"https://init.best/%3Cimage%20path/url%3E","datePublished":"2022-03-30T00:17:51+08:00","dateModified":"2022-03-30T00:17:51+08:00","author":{"@type":"Person","name":"drizzl4"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://init.best/posts/%E6%95%B0%E6%8D%AE%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%AC%94%E8%AE%B0/"},"publisher":{"@type":"Organization","name":"drizzl4","logo":{"@type":"ImageObject","url":"https://init.best/%3Clink%20/%20abs%20url%3E"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=https://init.best/ accesskey=h title="drizzl4 (Alt + H)">
+<img src=/apple-touch-icon.png alt=logo aria-label=logo height=35>drizzl4</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=https://init.best/archive/ title=Archive>
+<span>Archive</span>
+</a>
+</li>
+<li>
+<a href=https://init.best/categories/ title=Categories>
+<span>Categories</span>
+</a>
+</li>
+<li>
+<a href=https://init.best/search/ title="Search (Alt + /)" accesskey=/>
+<span>Search</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<h1 class=post-title>
+数据密集型应用系统设计笔记
+</h1>
+<div class=post-description>
+Don't be serious
+</div>
+<div class=post-meta>March 30, 2022&nbsp;·&nbsp;2 min&nbsp;·&nbsp;drizzl4&nbsp;|&nbsp;<a href=https://github.com/drizzl4/drizzl4.github.io/blob/master/content/posts/%e6%95%b0%e6%8d%ae%e5%af%86%e9%9b%86%e5%9e%8b%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0.md rel="noopener noreferrer" target=_blank>Edit</a>
+</div>
+</header> <div class=toc>
+<details>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#%e7%ac%ac%e4%b8%80%e7%ab%a0-%e5%8f%af%e6%89%a9%e5%b1%95%e4%b8%8e%e5%8f%af%e7%bb%b4%e6%8a%a4%e7%9a%84%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f aria-label="第一章 可扩展与可维护的应用系统">第一章 可扩展与可维护的应用系统</a><ul>
+<li>
+<a href=#%e4%b8%80%e4%bb%80%e4%b9%88%e6%98%af%e6%95%b0%e6%8d%ae%e5%af%86%e9%9b%86%e5%9e%8b%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f aria-label=一、什么是“数据密集型应用系统”？>一、什么是“数据密集型应用系统”？</a><ul>
+<li>
+<a href=#1%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f%e4%b8%80%e8%88%ac%e5%8c%85%e5%90%ab%e7%9a%84%e6%a8%a1%e5%9d%97 aria-label=1、应用系统一般包含的模块>1、应用系统一般包含的模块</a></li>
+<li>
+<a href=#2%e9%80%9a%e7%94%a8%e7%9a%84%e7%b3%bb%e7%bb%9f%e6%9e%b6%e6%9e%84 aria-label=2、通用的系统架构>2、通用的系统架构</a></li>
+<li>
+<a href=#3%e8%bd%af%e4%bb%b6%e7%b3%bb%e7%bb%9f%e6%9e%81%e4%b8%ba%e9%87%8d%e8%a6%81%e7%9a%84%e4%b8%89%e4%b8%aa%e9%97%ae%e9%a2%98 aria-label=3、软件系统极为重要的三个问题>3、软件系统极为重要的三个问题</a><ul>
+<li>
+<a href=#31-%e5%bb%b6%e8%bf%9f%e4%b8%8e%e5%93%8d%e5%ba%94%e6%97%b6%e9%97%b4%e7%9a%84%e4%b8%8d%e5%90%8c aria-label="3.1 延迟与响应时间的不同">3.1 延迟与响应时间的不同</a></li>
+<li>
+<a href=#32-%e7%99%be%e5%88%86%e4%bd%8d%e6%95%b0 aria-label="3.2 百分位数">3.2 百分位数</a></li>
+<li>
+<a href=#33-%e6%89%b9%e5%a4%84%e7%90%86%e7%b3%bb%e7%bb%9f%e4%b8%8e%e7%ba%bf%e6%80%a7%e7%b3%bb%e7%bb%9f aria-label="3.3 批处理系统与线性系统">3.3 批处理系统与线性系统</a></li></ul>
+</li></ul>
+</li></ul>
+</li>
+<li>
+<a href=#%e7%ac%ac%e4%ba%8c%e7%ab%a0-%e6%95%b0%e6%8d%ae%e6%a8%a1%e5%9e%8b%e4%b8%8e%e6%9f%a5%e8%af%a2%e8%af%ad%e8%a8%80 aria-label="第二章 数据模型与查询语言">第二章 数据模型与查询语言</a><ul>
+<li>
+<a href=#%e4%b8%80%e6%95%b0%e6%8d%ae%e5%ba%93%e6%a8%a1%e5%9e%8b aria-label=一、数据库模型>一、数据库模型</a><ul>
+<li>
+<a href=#1%e7%bd%91%e7%bb%9c%e6%a8%a1%e5%9e%8b%e5%b7%b2%e7%bb%8f%e8%a2%ab%e6%8a%9b%e5%bc%83 aria-label=1.网络模型（已经被抛弃）>1.网络模型（已经被抛弃）</a></li>
+<li>
+<a href=#2%e5%85%b3%e7%b3%bb%e6%a8%a1%e5%9e%8b aria-label=2.关系模型>2.关系模型</a></li>
+<li>
+<a href=#3%e6%96%87%e6%a1%a3%e6%95%b0%e6%8d%ae%e5%ba%93 aria-label=3.文档数据库>3.文档数据库</a></li></ul>
+</li>
+<li>
+<a href=#%e4%ba%8c%e4%b8%80%e5%af%b9%e5%a4%9a aria-label=二、一对多>二、一对多</a></li>
+<li>
+<a href=#%e4%b8%89%e5%85%b3%e7%b3%bb%e6%95%b0%e6%8d%ae%e5%ba%93%e4%b8%8e%e6%96%87%e6%a1%a3%e6%95%b0%e6%8d%ae%e5%ba%93 aria-label=三、关系数据库与文档数据库>三、关系数据库与文档数据库</a></li>
+<li>
+<a href=#%e5%9b%9b%e9%a2%9d%e5%a4%96%e6%94%b6%e8%8e%b7 aria-label=四、额外收获>四、额外收获</a></li></ul>
+</li>
+<li>
+<a href=#%e7%ac%ac%e4%b8%89%e7%ab%a0-%e6%95%b0%e6%8d%ae%e5%ad%98%e5%82%a8%e4%b8%8e%e6%a3%80%e7%b4%a2 aria-label="第三章 数据存储与检索">第三章 数据存储与检索</a><ul>
+<li>
+<a href=#%e4%b8%80%e7%b4%a2%e5%bc%95 aria-label=一、索引>一、索引</a><ul>
+<li>
+<a href=#1%e5%93%88%e5%b8%8c%e7%b4%a2%e5%bc%95 aria-label=1.哈希索引>1.哈希索引</a></li>
+<li>
+<a href=#%e5%a6%82%e4%bd%95%e8%a7%a3%e5%86%b3%e7%a3%81%e7%9b%98%e7%94%a8%e5%b0%bd aria-label=如何解决磁盘用尽？>如何解决磁盘用尽？</a></li>
+<li>
+<a href=#%e6%95%b0%e6%8d%ae%e5%88%a0%e9%99%a4 aria-label=数据删除>数据删除</a></li>
+<li>
+<a href=#2sstables aria-label=2.SSTables>2.SSTables</a></li>
+<li>
+<a href=#3b-trees aria-label=3、B-trees>3、B-trees</a></li>
+<li>
+<a href=#4%e7%b4%a2%e5%bc%95%e5%8d%b3%e6%95%b0%e6%8d%ae aria-label=4、索引即数据>4、索引即数据</a></li></ul>
+</li>
+<li>
+<a href=#%e4%ba%8c%e6%95%b0%e6%8d%ae%e5%a4%84%e7%90%86 aria-label=二、数据处理>二、数据处理</a><ul>
+<li>
+<a href=#1%e6%95%b0%e6%8d%ae%e4%bb%93%e5%ba%93 aria-label=1、数据仓库>1、数据仓库</a></li></ul>
+</li>
+<li>
+<a href=#2%e6%98%9f%e5%9e%8b%e4%b8%8e%e9%9b%aa%e8%8a%b1%e5%88%86%e6%9e%90%e6%a8%a1%e5%bc%8f aria-label=2、星型与雪花分析模式>2、星型与雪花分析模式</a></li></ul>
+</li>
+<li>
+<a href=#%e7%ac%ac%e5%9b%9b%e7%ab%a0-%e6%95%b0%e6%8d%ae%e7%bc%96%e7%a0%81%e4%b8%8e%e6%bc%94%e5%8c%96 aria-label="第四章 数据编码与演化">第四章 数据编码与演化</a>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><h1 id=第一章-可扩展与可维护的应用系统>第一章 可扩展与可维护的应用系统<a hidden class=anchor aria-hidden=true href=#第一章-可扩展与可维护的应用系统>#</a></h1>
+<h2 id=一什么是数据密集型应用系统>一、什么是“数据密集型应用系统”？<a hidden class=anchor aria-hidden=true href=#一什么是数据密集型应用系统>#</a></h2>
+<p>当今许多新型应用都属于数据密集型( data-intensi ve)，而不是计算密集型 (compute-intensive)。对于这些类型应用， CPU的处理能力往往不是第一限制性因素，关键在于数据量、数据的复杂度及数据的快速多变性。</p>
+<p>而我们平时遇到的大部分系统都是数据密集型，其过程都是代码访问内存、数据库中的数据，经过业务逻辑处理，最后返回给用户。</p>
+<h3 id=1应用系统一般包含的模块>1、应用系统一般包含的模块<a hidden class=anchor aria-hidden=true href=#1应用系统一般包含的模块>#</a></h3>
+<ul>
+<li>数据库:用以存储数据，这样之后应用可以再次面问。</li>
+<li>高速缓存 : 缓存那些复杂或操作代价昂贵的结果，以加快下一次访问。</li>
+<li>索引 : 用户可以按关键字搜索数据井支持各种过掳 。</li>
+<li>流式处理:持续发送消息至另 一 个进程，处理采用异步方式。</li>
+<li>批处理 : 定期处理大量的累积数据。</li>
+</ul>
+<h3 id=2通用的系统架构>2、通用的系统架构<a hidden class=anchor aria-hidden=true href=#2通用的系统架构>#</a></h3>
+<p><img loading=lazy src="https://3811707129-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2Fplainchant%2F-MCexl-wRYNTOJqyjxqF%2F-MCexqJhziB8hCDrmV1L%2F28105543.png?generation=1595227470367300&alt=media" alt=img>
+</p>
+<h3 id=3软件系统极为重要的三个问题>3、软件系统极为重要的三个问题<a hidden class=anchor aria-hidden=true href=#3软件系统极为重要的三个问题>#</a></h3>
+<ul>
+<li>
+<p>可靠性
+容忍硬件/软件失效，人为的错误</p>
+</li>
+<li>
+<p>可扩展性
+可扩展性是用来描述系统应对负载增加能力</p>
+</li>
+<li>
+<p>可维护型</p>
+<p>可运维、简单、可演化性</p>
+</li>
+</ul>
+<h4 id=31-延迟与响应时间的不同>3.1 延迟与响应时间的不同<a hidden class=anchor aria-hidden=true href=#31-延迟与响应时间的不同>#</a></h4>
+<ol>
+<li>响应时间为请求时间+来回网络延迟+排队延迟</li>
+<li>延迟为请求花费在处理上的时间</li>
+</ol>
+<h4 id=32-百分位数>3.2 百分位数<a hidden class=anchor aria-hidden=true href=#32-百分位数>#</a></h4>
+<p>通常平均响应时间的计算为将n个值相加并除以n，然后因为请求不同或请求数据不同，无法告诉有多少用户实际经历了多少延迟。</p>
+<p>因此最好使用百分位数( percen ti Jes) 。如果已经搜集到了响应 时间 信息，将其从最 快到最慢排序，中位数( median)就是列表中间的响应时间。例如，如果中位数响应 时间为200 ms，那意味着有一半的请求响应不到200 ms，而另一半请求则需要更长的时间。</p>
+<p>中位数指标非常适合描述多少用户需要等待多长时间: 一半的用户请求的服务时间少 于中位数响应时间，另 一半则多于中位数的时间。因 此中 位数也称为 50百分位数，有 时缩 写为 p50。</p>
+<p>采用较高的响应时间百分位数(tail latencies，尾部延时或长尾效应)很重要，因为它们直接影响用户的总体服务体验。亚马逊注意到，响应时间每增加100ms，销售额就会下降1%，其他研究则表明，1s的延时增加等价于让客户满意度下降16%。</p>
+<h4 id=33-批处理系统与线性系统>3.3 批处理系统与线性系统<a hidden class=anchor aria-hidden=true href=#33-批处理系统与线性系统>#</a></h4>
+<p>在批处理系统中，我们通常关心吞吐量(throughput)，即每秒可处理的记录条数，或者在某指定数据集上运行作业所需的总时间；而在线性系统中通常更看重服务的响应时间(response time)，即客户端从发出请求到接收响应之间的间隔。</p>
+<h1 id=第二章-数据模型与查询语言>第二章 数据模型与查询语言<a hidden class=anchor aria-hidden=true href=#第二章-数据模型与查询语言>#</a></h1>
+<p>本章大量篇幅是对各种数据模型的介绍，开阔视野，在平常的开发中，对于数据存储的选择还是需要进一步调研，选择合适的数据库。</p>
+<h2 id=一数据库模型>一、数据库模型<a hidden class=anchor aria-hidden=true href=#一数据库模型>#</a></h2>
+<h3 id=1网络模型已经被抛弃>1.网络模型（已经被抛弃）<a hidden class=anchor aria-hidden=true href=#1网络模型已经被抛弃>#</a></h3>
+<p>CODASYL模型是层次模型的推广。在层次模型的树结构中 ，每个记录只有一个父结点;而在网络模型中， 一个记录可能有多个父结点 。 例如， “大西雅图地区”可能有 一个记录，居住在该地区的每个用户都链接指向 它。从而支持对多对一和多对多的关 系进行建模。</p>
+<p>其访问方式，像是遍历链表 : 从链表的头部开始， 一次查看一个记 录，直到找到所需的记录。 但是在一个多对多关系的世界里，存在多条不同的路径通 向相同的记录，使用网络模型的程序员必须在脑海中设毡跟踪这些不同的访问路径。</p>
+<h3 id=2关系模型>2.关系模型<a hidden class=anchor aria-hidden=true href=#2关系模型>#</a></h3>
+<p>关系模型所做的则是定义了所有数据的格式:关系(表)只是元组(行) 的集合</p>
+<h3 id=3文档数据库>3.文档数据库<a hidden class=anchor aria-hidden=true href=#3文档数据库>#</a></h3>
+<p>文档数据库是某种方式的层次模型 : 即在其父记录中保存了嵌套记录，而不是存 储在单独的表中。</p>
+<h2 id=二一对多>二、一对多<a hidden class=anchor aria-hidden=true href=#二一对多>#</a></h2>
+<p>以user表为例，其实现方式：</p>
+<ul>
+<li>在传统的SQL模型(SQL: 1999之前)中， 最常见的规范化表示是将职位、教育 和联系信息放在单独的 表中 ， 并二使用外键引用 users表。</li>
+<li>之后的 SQL标准增加了对结构化数据类型和 XML数据的支持。这允许将多值数据存储在单行内 ，并支持在这些文档中查询和索引。 一些数据库也支持JSON数据类型，例如IBM DB2、 MySQL和PostgreSQL。</li>
+<li>第三个选项是将工作、教育和联系信息编码为JSON或XML文档，将其存储在数 据库的文本列中，并由应用程序解释其结构和内容。对于此方峙，通常不能使用 数据库查询该编码列中的值。</li>
+</ul>
+<p>在存储用户的部分信息，例如：地区或行业，使用对应的码值，而不是字符串进行存储，含义：</p>
+<ul>
+<li>避免歧义(例如，如果存在一些同名的城市)。</li>
+<li>易于更新:名字只保存一次，因此，如果需要改变，可以很容易全面更新。</li>
+<li>本地化支持:当网站被翻译成其他语言时，标准化的列表可以方便本地化，因此 地 区和行业可以用 查看者的母语来显示 。</li>
+<li>更好的搜索支持:例如，搜索华盛顿 州的慈善 家可以匹配到过个简历，这是因为地区列表可以将西雅图属于华盛顿的信息编码进来(而从“大西雅图地区”字符 串中并不能看出来西雅图属于华盛顿) 。</li>
+</ul>
+<h2 id=三关系数据库与文档数据库>三、关系数据库与文档数据库<a hidden class=anchor aria-hidden=true href=#三关系数据库与文档数据库>#</a></h2>
+<p>如果应用数据具有类似文档的结构(即一对多关系树，通常一次加载整个树) ， 那么使用文档模型更为合适。而关系型模型则倾向于某种数据分解，它把文档结构分解为多个表，有可能使得模式更为笨重，以及不必要的应用代码复杂化。</p>
+<p>文档模型也有 一 定的局限性：例如， 不能直接引用文档中的嵌套项，而需要说“用户 251的职位列表中的第二项” (非常类似于层次模型中的访问路径) 。然而，只要文档嵌套不太深，这通常不是问题。</p>
+<p>如果程序中确实存在多对多的关系结构，那么使用文档类型数据库就不合适了，因为这需要你在应用层建立对应的联结关系，使得代码逻辑更加复杂。</p>
+<h2 id=四额外收获>四、额外收获<a hidden class=anchor aria-hidden=true href=#四额外收获>#</a></h2>
+<ol>
+<li>ALTER TABLE时，会将整张表复制，所以当表很大的时候，可能需要几分钟甚至几个小时的时间停机。</li>
+<li>在大表上进行update语句时，可以采用懒加载的方式，只有当调用的时候才进行填充。</li>
+<li>文档数据库查询数据局部性：如果数据被划分在多个表里，则需要多次索引查找来检索数据，更多的磁盘I/O操作，花费更多的时间。当文档以JSON、XML或者二进制的方式进行存储，在访问信息的时候，会访问大部分内容，则数据库通常会加载整个文档，如果应用只是访问其中的一小部分，则对于大型文档数据来讲就有些浪费。对文档进行更新时，通常会重写整个文档，而只有修改量不改变惊文档大小时， 原地覆盖更新才更有效。因此，通常建议文档应该尽量小且避免写入时增加文档大小。 这些性能方面的不利因素大大限制了文档数据库的适用场景。</li>
+</ol>
+<h1 id=第三章-数据存储与检索>第三章 数据存储与检索<a hidden class=anchor aria-hidden=true href=#第三章-数据存储与检索>#</a></h1>
+<h2 id=一索引>一、索引<a hidden class=anchor aria-hidden=true href=#一索引>#</a></h2>
+<p>为了高效地查询数据库中的值,需要新的数据结构：索引。索引会加速查询速度，但是会使得写入速度变慢。</p>
+<p>下面都是讨论的key-value索引</p>
+<h3 id=1哈希索引>1.哈希索引<a hidden class=anchor aria-hidden=true href=#1哈希索引>#</a></h3>
+<p>键值对的数据结构[key,value],最长见的如 HashMap。
+现在，假设数据存储全部采用追加式的文件组成。</p>
+<ul>
+<li>用户将数据存储在硬盘上，并且返回文件的偏移量，</li>
+<li>将文件的偏移量在内存更新</li>
+<li>当用户查询具体的key值时，找到文件的偏移量，读取文件数据，返回对应的值</li>
+</ul>
+<p><strong>优点：</strong></p>
+<ul>
+<li>基于内存的 key 寻址会非常快，hash(key)的时间复杂度为 1.</li>
+<li>只需要一次磁盘寻址，快速的将数据加载到内存</li>
+<li>可以利用文件系统的缓存无需 IO 开销</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>我们采用的是追加读模式，可能存在磁盘用尽</li>
+<li>随着 key 的增加，内存容量也会成为一个瓶颈</li>
+<li>机器宕机重启内存数据丢失</li>
+<li>并发写入时的问题，因为我们是以追加写的方式将数据存储到磁盘，无法评估每个线程写入的数据量。</li>
+<li>数据的删除：还是由于数据在磁盘是以追加写的模式存储我们无法直接删除文件中的数据段</li>
+</ul>
+<h3 id=如何解决磁盘用尽>如何解决磁盘用尽？<a hidden class=anchor aria-hidden=true href=#如何解决磁盘用尽>#</a></h3>
+<p>一个好的解决方案是将日志分解成一定大小的段，当文件达到一定大小时就关闭它，井将后续写入到新 的段文件中。然后可以在这些段上执行压缩，压缩意味着在日志中丢弃重复的键，并且只保留每个键最近的更新。</p>
+<h3 id=数据删除>数据删除<a hidden class=anchor aria-hidden=true href=#数据删除>#</a></h3>
+<p>可以在用户提交删除申请的时候记录下来，在文件执行合并、压缩操作时在执行删除操作</p>
+<h3 id=2sstables>2.SSTables<a hidden class=anchor aria-hidden=true href=#2sstables>#</a></h3>
+<p>在哈希索引中，对日志进行压缩使用的排序规则为：按写入顺序排列，并且对于出现在日志中的同一个键，后出现的值优于之前的值。</p>
+<p>现在，将key-value的排序规则改为，按键排序，这种排序称为“排序字符表”，或简称SSTable。它要求每个键在每个合并的段文件中只能出现一次(压缩过程已经确保了)。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>合并段更加简单高效，即使文件大于可用内存。并发读取多个输入段文件，把最小的键按照排列顺序拷贝到输出文件中，如此往复，最终实现段按照键的顺序进行合并</li>
+<li>根据排序的特性，在进行key查找时，不需要从头开始遍历，例如，key1&lt;key2&lt;key3，可以借助key1、key2的偏移量去查找key2</li>
+<li>根据排序的特性，实现稀疏索引，节省磁盘空间，压缩减少I\O带宽占用</li>
+</ul>
+<p><img loading=lazy src=/images/image-20220417233742469.png alt=image-20220417233742469>
+</p>
+<p><strong>SSTables的构建：</strong></p>
+<ul>
+<li>当写入时，将数据存入到内存当中，即内存表。</li>
+<li>当内存表大于某个阀值，则将其写入到磁盘中，因为SSTable按键排序，所以写入速度很快。</li>
+<li>在写入磁盘的同时，写入可以同时工作，数据将会写入到一个新的内存表实例中。</li>
+<li>在查找数据时，首先在内存表中查找，然后在最新的磁盘段文件中查找，其次是次新的段文件，以此类推</li>
+<li>后台进程周期性地执行段合并与压缩过程，以合并多个段文件，并丢弃那些已被覆盖或删除的值 。</li>
+</ul>
+<h3 id=3b-trees>3、B-trees<a hidden class=anchor aria-hidden=true href=#3b-trees>#</a></h3>
+<p><img loading=lazy src=/images/image-20220417235808764.png alt=image-20220417235808764>
+</p>
+<p>B-Tree 将数据库分解成固定大小的快或者页，传统上为 4KB,页是内部的最小读写单元。</p>
+<p>每个页面都可以使用地址或者位置进行标识，这样可以让一个页面引用另一个页面，类似指针，不过是指向磁盘地址，而不是内存。通过页面就可以构造如上所示的树状结构。</p>
+<p>某一个页被指定为树的根，每次的查找都是从这个根开始。该页面包含若干个键和对子页的引用。每个孩子都负责一个连续范围内的查找，相邻引用之间的键可以只是这些范围之间的边界。</p>
+<ul>
+<li>
+<p>**键的查找:**从根节点开始，根据区间查找，一层层往下查找知道找到目标值或者返回 null</p>
+</li>
+<li>
+<p>**键的更新:**首先查找到包含该键的页节点，将页节点从磁盘读回内存[这里也有可能由于缓存的原因，直接从内存中读取]然后更新键再写回磁盘</p>
+</li>
+<li>
+<p>**键的插入：**首先需要找到该键所属范围的页节点，将新建插入其中，但是如果该页节点没有足够的空间来容纳该新键则需要进行分裂，将原来的页节点分裂为两个半满的页，并且其父节点也需要更新以包含分裂之后的新的键范围。</p>
+<p>在页分裂时如果写入一半系统崩溃，那么会导致出现孤儿页，从而导致索引破坏，为避免这种情况，通常会在B-tree外添加额外的磁盘数据结构：预写日志（WAL），也称为重做日志。预写日志仅支持追加写入，因此速度很快，它可以在系统崩溃时恢复数据。</p>
+</li>
+</ul>
+<p><strong>B-tree优化方案</strong></p>
+<ul>
+<li>一些数据库不直接覆盖页，也不用WAL恢复数据，而是使用写时复制方案：修改的页被写入不同位置，父页创建一个新版本并指向新的位置，这种方案同时有益于并发控制</li>
+<li>保存键的缩略信息而不是完整信息，可以节省页空间，从而把更多的键压入页中，实现更高的分支因子，进而减少层数。</li>
+<li>维护树的布局，让相邻叶子节点按顺序保存在磁盘上，通过范围读取实现预加载。但是随着树的增长，维护这个顺序也越来越难。</li>
+<li>在相邻的兄弟节点之间加入指针链接，可以直接跳到相邻节点不需要回到父节点再次跳转</li>
+</ul>
+<h3 id=4索引即数据>4、索引即数据<a hidden class=anchor aria-hidden=true href=#4索引即数据>#</a></h3>
+<p>在某些情况下，从索引到堆文件的额外跳转对于读取来说意味着太多的性能损失， 因此可能希望将索引行直接存储在索引中。这被称为聚集索引。例如，在 MySQL InnoDB存储引擎中，表的主键始终是聚集索引， 二级索引引用主键（ 而不是堆文件位置) 。 在SQL Server中，可以为每个表指定一个聚集索引。</p>
+<h2 id=二数据处理>二、数据处理<a hidden class=anchor aria-hidden=true href=#二数据处理>#</a></h2>
+<h3 id=1数据仓库>1、数据仓库<a hidden class=anchor aria-hidden=true href=#1数据仓库>#</a></h3>
+<p><img loading=lazy src=/images/image-20220418002206364.png alt=image-20220418002206364>
+</p>
+<h2 id=2星型与雪花分析模式>2、星型与雪花分析模式<a hidden class=anchor aria-hidden=true href=#2星型与雪花分析模式>#</a></h2>
+<p><img loading=lazy src=/images/image-20220418003000463.png alt=image-20220418003000463>
+</p>
+<p>Fact_sales为事实表，事实表的每一行表示在特定时间发生的事件(这里， 每一行代表客户购买的一个产品 ) 。其他列可能会 引用其他表的外键，称为维度表，例如：dim_product。</p>
+<p>雪花模式为星型模式的变体，在维度表中进行进一步的细分，例如：产品的品牌在另一张单独的表中。</p>
+<h1 id=第四章-数据编码与演化>第四章 数据编码与演化<a hidden class=anchor aria-hidden=true href=#第四章-数据编码与演化>#</a></h1>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=https://init.best/tags/note/>note</a></li>
+</ul>
+<nav class=paginav>
+<a class=prev href=https://init.best/posts/2021-plan/>
+<span class=title>« Prev Page</span>
+<br>
+<span>Plan Record</span>
+</a>
+<a class=next href=https://init.best/posts/eureka-to-nacos/>
+<span class=title>Next Page »</span>
+<br>
+<span>Eureka to Nacos</span>
+</a>
+</nav>
+<div class=share-buttons>
+<a target=_blank rel="noopener noreferrer" aria-label="share 数据密集型应用系统设计笔记 on twitter" href="https://twitter.com/intent/tweet/?text=%e6%95%b0%e6%8d%ae%e5%af%86%e9%9b%86%e5%9e%8b%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0&url=https%3a%2f%2finit.best%2fposts%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%25AF%2586%25E9%259B%2586%25E5%259E%258B%25E5%25BA%2594%25E7%2594%25A8%25E7%25B3%25BB%25E7%25BB%259F%25E8%25AE%25BE%25E8%25AE%25A1%25E7%25AC%2594%25E8%25AE%25B0%2f&hashtags=note"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM195.519 424.544c135.939.0 210.268-112.643 210.268-210.268.0-3.218.0-6.437-.153-9.502 14.406-10.421 26.973-23.448 36.935-38.314-13.18 5.824-27.433 9.809-42.452 11.648 15.326-9.196 26.973-23.602 32.49-40.92-14.252 8.429-30.038 14.56-46.896 17.931-13.487-14.406-32.644-23.295-53.946-23.295-40.767.0-73.87 33.104-73.87 73.87.0 5.824.613 11.494 1.992 16.858-61.456-3.065-115.862-32.49-152.337-77.241-6.284 10.881-9.962 23.601-9.962 37.088.0 25.594 13.027 48.276 32.95 61.456-12.107-.307-23.448-3.678-33.41-9.196v.92c0 35.862 25.441 65.594 59.311 72.49-6.13 1.686-12.72 2.606-19.464 2.606-4.751.0-9.348-.46-13.946-1.38 9.349 29.426 36.628 50.728 68.965 51.341-25.287 19.771-57.164 31.571-91.8 31.571-5.977.0-11.801-.306-17.625-1.073 32.337 21.15 71.264 33.41 112.95 33.41z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share 数据密集型应用系统设计笔记 on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3a%2f%2finit.best%2fposts%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%25AF%2586%25E9%259B%2586%25E5%259E%258B%25E5%25BA%2594%25E7%2594%25A8%25E7%25B3%25BB%25E7%25BB%259F%25E8%25AE%25BE%25E8%25AE%25A1%25E7%25AC%2594%25E8%25AE%25B0%2f&title=%e6%95%b0%e6%8d%ae%e5%af%86%e9%9b%86%e5%9e%8b%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0&summary=%e6%95%b0%e6%8d%ae%e5%af%86%e9%9b%86%e5%9e%8b%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0&source=https%3a%2f%2finit.best%2fposts%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%25AF%2586%25E9%259B%2586%25E5%259E%258B%25E5%25BA%2594%25E7%2594%25A8%25E7%25B3%25BB%25E7%25BB%259F%25E8%25AE%25BE%25E8%25AE%25A1%25E7%25AC%2594%25E8%25AE%25B0%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share 数据密集型应用系统设计笔记 on reddit" href="https://reddit.com/submit?url=https%3a%2f%2finit.best%2fposts%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%25AF%2586%25E9%259B%2586%25E5%259E%258B%25E5%25BA%2594%25E7%2594%25A8%25E7%25B3%25BB%25E7%25BB%259F%25E8%25AE%25BE%25E8%25AE%25A1%25E7%25AC%2594%25E8%25AE%25B0%2f&title=%e6%95%b0%e6%8d%ae%e5%af%86%e9%9b%86%e5%9e%8b%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share 数据密集型应用系统设计笔记 on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2finit.best%2fposts%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%25AF%2586%25E9%259B%2586%25E5%259E%258B%25E5%25BA%2594%25E7%2594%25A8%25E7%25B3%25BB%25E7%25BB%259F%25E8%25AE%25BE%25E8%25AE%25A1%25E7%25AC%2594%25E8%25AE%25B0%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share 数据密集型应用系统设计笔记 on whatsapp" href="https://api.whatsapp.com/send?text=%e6%95%b0%e6%8d%ae%e5%af%86%e9%9b%86%e5%9e%8b%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0%20-%20https%3a%2f%2finit.best%2fposts%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%25AF%2586%25E9%259B%2586%25E5%259E%258B%25E5%25BA%2594%25E7%2594%25A8%25E7%25B3%25BB%25E7%25BB%259F%25E8%25AE%25BE%25E8%25AE%25A1%25E7%25AC%2594%25E8%25AE%25B0%2f"><svg viewBox="0 0 512 512"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg>
+</a>
+<a target=_blank rel="noopener noreferrer" aria-label="share 数据密集型应用系统设计笔记 on telegram" href="https://telegram.me/share/url?text=%e6%95%b0%e6%8d%ae%e5%af%86%e9%9b%86%e5%9e%8b%e5%ba%94%e7%94%a8%e7%b3%bb%e7%bb%9f%e8%ae%be%e8%ae%a1%e7%ac%94%e8%ae%b0&url=https%3a%2f%2finit.best%2fposts%2f%25E6%2595%25B0%25E6%258D%25AE%25E5%25AF%2586%25E9%259B%2586%25E5%259E%258B%25E5%25BA%2594%25E7%2594%25A8%25E7%25B3%25BB%25E7%25BB%259F%25E8%25AE%25BE%25E8%25AE%25A1%25E7%25AC%2594%25E8%25AE%25B0%2f"><svg viewBox="2 2 28 28"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg>
+</a>
+</div>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2022 <a href=https://init.best/>drizzl4</a></span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='copy';function d(){a.innerText='copied!',setTimeout(()=>{a.innerText='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>

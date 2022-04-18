@@ -9,14 +9,32 @@
       <link>https://init.best/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 07 Sep 2021 21:51:03 +0800</lastBuildDate><atom:link href="https://init.best/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 30 Mar 2022 00:17:51 +0800</lastBuildDate><atom:link href="https://init.best/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>2021 Plan</title>
+      <title>Plan Record</title>
       <link>https://init.best/posts/2021-plan/</link>
       <pubDate>Mon, 16 Aug 2021 23:06:44 +0800</pubDate>
       
       <guid>https://init.best/posts/2021-plan/</guid>
       <description>My Plan Record</description>
+    </item>
+    
+    <item>
+      <title>数据密集型应用系统设计笔记</title>
+      <link>https://init.best/posts/%E6%95%B0%E6%8D%AE%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 30 Mar 2022 00:17:51 +0800</pubDate>
+      
+      <guid>https://init.best/posts/%E6%95%B0%E6%8D%AE%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%AC%94%E8%AE%B0/</guid>
+      <description>Don&amp;#39;t be serious</description>
+    </item>
+    
+    <item>
+      <title>Eureka to Nacos</title>
+      <link>https://init.best/posts/eureka-to-nacos/</link>
+      <pubDate>Tue, 02 Nov 2021 23:45:28 +0800</pubDate>
+      
+      <guid>https://init.best/posts/eureka-to-nacos/</guid>
+      <description>Eureka to Nacos</description>
     </item>
     
     <item>
