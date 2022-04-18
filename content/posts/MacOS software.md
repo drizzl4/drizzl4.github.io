@@ -45,15 +45,12 @@ Mac software recommend
 |Mounty|Mobile HDD|
 |Skim|PDF reader|
 |Hidden Bar|Just like its name|
-|Mini Calendar|Calendar|
 |IINA|Player|
 |Idea|development|
 |LyricsX|lyrics|
 |Sourcetree|git tool|
 |iHosts|change host quickly|
-|Gridea|blog tool|
 |Sourcetrail|watch the code|
-|Sequel Ace|database tool|
 |Moon FM|FM|
 |qBittorent|bt|
 |AppCleaner|clean your mac when you delete software|
@@ -66,7 +63,6 @@ Mac software recommend
 |Google Chrome||
 |paw|API tool|
 |Reeder|Rss Reader|
-|iTerm|terminal|
 |Stats|little tool|
 |ublacklist for Safari|Safari extension|
 |Obsidian|markdown tool|
